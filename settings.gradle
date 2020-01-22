@@ -1,0 +1,2 @@
+include ':app', ':licensed-ocr-engine-release'
+rootProject.name='RemoteCameraControl'

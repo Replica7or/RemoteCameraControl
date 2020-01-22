@@ -1,0 +1,2 @@
+com.codevog.android.license_library
+string app_name

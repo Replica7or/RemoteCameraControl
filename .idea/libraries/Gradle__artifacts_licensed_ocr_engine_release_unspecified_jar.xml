@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: artifacts:licensed-ocr-engine-release:unspecified@jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/licensed-ocr-engine-release/build/.transforms/7b3d475a61974393696e6cde466b31c4/licensed-ocr-engine-release/jars/classes.jar!/" />
+      <root url="file://$PROJECT_DIR$/licensed-ocr-engine-release/build/.transforms/7b3d475a61974393696e6cde466b31c4/licensed-ocr-engine-release/res" />
+      <root url="jar://$PROJECT_DIR$/licensed-ocr-engine-release/build/.transforms/7b3d475a61974393696e6cde466b31c4/licensed-ocr-engine-release/jars/libs/conceal_android.jar!/" />
+      <root url="jar://$PROJECT_DIR$/licensed-ocr-engine-release/build/.transforms/7b3d475a61974393696e6cde466b31c4/licensed-ocr-engine-release/jars/libs/libconceal.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
