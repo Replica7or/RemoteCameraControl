@@ -37,10 +37,10 @@ public class CameraServer  extends HandlerThread {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        myThread.start();
+        //myThread.start();
     }
 
-    Thread myThread = new Thread(new Runnable() {
+   /* Thread myThread = new Thread(new Runnable() {
         @Override
         public void run() {
             while(true) {
@@ -65,7 +65,7 @@ public class CameraServer  extends HandlerThread {
                         public void run() {
                             switch (CameraControlChannel.getControl().stream.getMode()) {
                                 case 0:
-                                    CameraControlChannel.getControl().stream = new VideoStream(mContext);
+                                    CameraControlChannel.getControl().stream = new VideoStream(mContext,);
                                     CameraControlChannel.getControl().stream.CameraStart(CameraMode.STREAM_DRAWING_SURFACE_MODE);
                                     break;
                                 case 1:
@@ -126,5 +126,5 @@ public class CameraServer  extends HandlerThread {
             e.printStackTrace();
         }
         return sb.toString();
-    }
+    }*/
 }

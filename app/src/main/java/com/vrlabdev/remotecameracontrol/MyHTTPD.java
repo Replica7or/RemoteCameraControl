@@ -1,5 +1,6 @@
 package com.vrlabdev.remotecameracontrol;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
 
@@ -15,6 +16,7 @@ public class MyHTTPD extends NanoHTTPD {
     public static final int PORT = 8765;
 
     Context mContext=null;
+    Activity mActivity = null;
     private Handler mUiHandler = new Handler();
 
     public MyHTTPD() throws IOException
@@ -26,6 +28,7 @@ public class MyHTTPD extends NanoHTTPD {
     {
         mContext=context;
     }
+    public void setmActivity(Activity activity){mActivity=activity;}
     @Override
     public Response serve(IHTTPSession session) {
         String uri = session.getUri();
@@ -36,10 +39,11 @@ public class MyHTTPD extends NanoHTTPD {
                 @Override
                 public void run() {
 
-                            CameraControlChannel.getControl().stream = new VideoStream(mContext);
+                            CameraControlChannel.getControl().stream = new VideoStream(mContext,mActivity);
                             CameraControlChannel.getControl().stream.takePicture();
                             //CameraControlChannel.getControl().stream.CameraStart(CameraMode.STREAM_DRAWING_SURFACE_MODE);
-
+int i=5;
+i=3;
 
                 }
             });
@@ -51,7 +55,7 @@ public class MyHTTPD extends NanoHTTPD {
             mUiHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    CameraControlChannel.getControl().stream = new VideoStream(mContext);
+                    CameraControlChannel.getControl().stream = new VideoStream(mContext,mActivity);
                     CameraControlChannel.getControl().stream.startVideoRecord();
                 }
             });
@@ -77,7 +81,7 @@ public class MyHTTPD extends NanoHTTPD {
             mUiHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    CameraControlChannel.getControl().stream = new VideoStream(mContext);
+                    CameraControlChannel.getControl().stream = new VideoStream(mContext,mActivity);
                     String path = CameraControlChannel.getControl().stream.takePicture();
                 }
             });

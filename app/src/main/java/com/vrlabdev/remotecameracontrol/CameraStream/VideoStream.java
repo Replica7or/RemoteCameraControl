@@ -34,6 +34,7 @@ import androidx.annotation.NonNull;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.DatagramPacket;
@@ -90,6 +91,7 @@ public class VideoStream {
     int port = 5005;
 
     private Context mContext;
+    private Activity mActivity;
     public static boolean flashlight = false;
     private TextureView texture;
     private CameraDevice cameraDevice;
@@ -109,10 +111,11 @@ public class VideoStream {
     public boolean isRecordingVideo;
 
 
-    public VideoStream(Context context) {
+    public VideoStream(Context context,Activity activity) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();     //эти 2 строчки позволяют отправлять в сеть из основного потока
         StrictMode.setThreadPolicy(policy);
         mContext = context;
+        mActivity = activity;
     }
 
     public void CameraBuild(int CameraMode) {
@@ -243,11 +246,11 @@ public class VideoStream {
                 cameraDevice = mCameraDevice;
                 Log.i(LOG_TAG, "Open camera  with id:" + mCameraDevice.getId());
 
-                try {
+                /*try {
                     setUpMediaRecorder();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
 
                 switch (CameraMode) {
                     case 0:
@@ -279,7 +282,7 @@ public class VideoStream {
 
         private void startDrawing() {
             SurfaceTexture surfacetexture = texture.getSurfaceTexture();
-            surfacetexture.setDefaultBufferSize(720, 480);             //МИХАЛЫЧ ЭТО ЖЕ НАСТРОЙКА РАЗРЕШЕНИЯ КАМЕРЫ!!!!!!!!!!!1111111одиндинраз
+            surfacetexture.setDefaultBufferSize(1920, 1080);             //МИХАЛЫЧ ЭТО ЖЕ НАСТРОЙКА РАЗРЕШЕНИЯ КАМЕРЫ!!!!!!!!!!!1111111одиндинраз
             surface = new Surface(surfacetexture);
 
             try {
@@ -407,18 +410,18 @@ public class VideoStream {
 
 
 
-        private String takePicture() throws CameraAccessException
+        private void takePicture() throws CameraAccessException
         {
             if (myCameras[CAMERA1] == null) {
-                return "";
+                //return "";
             }
             CameraManager manager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
 
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
 
 
-            int width = 720;
-            int height = 480;
+            int width = 4608;
+            int height = 3456;
 
 
             final ImageReader reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 1);
@@ -440,7 +443,7 @@ public class VideoStream {
             Long tsLong = System.currentTimeMillis() / 1000;
             String ts = tsLong.toString();
 
-            file = new File(Environment.getExternalStorageDirectory() + "/" + ts + ".jpg");
+            file = new File(Environment.getExternalStorageDirectory() + "/" + ts + ".png");
 
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
@@ -466,6 +469,7 @@ public class VideoStream {
 
 
             reader.setOnImageAvailableListener(readerListener,mBackgroundHandler);
+
 
             final CameraCaptureSession.CaptureCallback captureListener = new CameraCaptureSession.CaptureCallback() {
                 @Override
@@ -497,7 +501,10 @@ public class VideoStream {
                 }
             },mBackgroundHandler);
 
-            return "/sdcard/"+file.getName();
+
+
+
+           // return "/sdcard/"+file.getName();
         }
 
 
@@ -506,24 +513,36 @@ public class VideoStream {
         {
             OutputStream outputStream = null;
 
-            outputStream = new FileOutputStream(file);
+            File storageDir = mContext.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+            Log.d("QQQ",file.getName());
+            //File imageFile = File.createTempFile(file.getName(), ".jpg", storageDir);
+
+            outputStream = new FileOutputStream(file.getAbsoluteFile());
             outputStream.write(bytes);
             outputStream.close();
 
-            if(recognition)
-            {
-                new Thread(new Runnable() {
-                    public void run() {
-                        while(bytes.length>file.length())
-                        { }
-                        final String [] massImages=new String[]{file.getAbsolutePath()};
-                        OpenOpen openOpen = new OpenOpen();
-                        MainInteractorImpl mainInteractor = new MainInteractorImpl((Activity) mContext);
-                        mainInteractor.importLicense("5301015b883c9ba2525e4e4145f4d5d44810268f8c6defeea75920873aa974084352e433f578d8fcd61f454f19b723b73fd239fe1cb45742ce7738e3ff49e3edf5a8ab34a4c245fd63b3109230db1f95b51fb05a11c7025647dc97bd5afc129c665527646fe1a5b031a2be95f301520f2eec990e7d355a8f6ea8264d6779d68d35245f6d5b9bea0cdc8e69d9e1d4319bda422e2d53a815eb092ad4cea7cf08efcfc3b9fa1dae1cfcc33bd2ee043c1ccae74795d72aadb81b860b63c14c58d9710d7dce61e7c2970f9381983210cdc1f947230769b9953f520cbdf635b4ee7ed11a059ab6bb2acd9d9824b0832857fade588e8d42c2c959727754e015e2fd876b52b28410e1f675b6457a98fd4ebdb2534e0f06c8881226b24767570f0f0f18971a3e644d7673b9790d1ee495303f4a487e366dc829265131372f5a189484c29787ec32a90321585a4e257b192ad9af7234f34f5e2b973edb5e61900a556a56d63727d486e0913d7ade82087bdd04fc931d7b1ee5f2de4844a74e8dea2c65945e");
-                        mainInteractor.doRecognize("b083c358-a424-4833-bfdc-3acf0c2db056", "052a13d0-9048-4f41-8c63-4a8130ee5b3c", massImages, openOpen);
-                    }
-                }).start();
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+
+            final String [] massImages=new String[]{file.getAbsolutePath()};
+            OpenOpen openOpen = new OpenOpen();
+            MainInteractorImpl mainInteractor = new MainInteractorImpl(mActivity);
+            Log.d("FILE_FILE", file.getAbsolutePath()+"   "+file.length());
+
+            //File downloadDirectory = new File("/sdcard/Android/data/com.vrlabdev.remotecameracontrol/files/Download/");
+            //downloadDirectory.mkdir();
+;
+            //mainInteractor.importServerKey("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCTO3et7a3NlDcPPbtJSBxI9MH6Dk6PE6zptZwp+6L3ijh7PxR0uyNaSSWnmQmzYxZNsGyBlGs+dQhlc4HFUjCaOVBaSDNaFaqXdfEm2TluLg5IhjxZLSbhYvLcgh4WEBernnWhjrRSXzV3AWRfiGBQqFleV09Xrp+vuQxn3BhoawIDAQAB");
+            //String licenseString = mainInteractor.generateLicenseRequest("b083c358-a424-4833-bfdc-3acf0c2db056", "052a13d0-9048-4f41-8c63-4a8130ee5b3c");
+            // writeToFile(new File("/sdcard/licenseRequest"),licenseString);
+            //Log.d("TWERQ",licenseString);
+            mainInteractor.importLicense("863f8b0c4824a9d8903d0f71b92959e1b55cef8d926b6ca4463b8be1f9a363b1352f94cfbf9b1a9505887c277a78c24e4a6a52e1301c8405624c8629871a2ee474015451500f8f22d9880c2dd304de447712360d97207bdd7392f3e63f843df48fa76b25e2e6acd982c2fbf5f99ddc7d16d83ed395d61415bc7652b910f027e844dff7f42a6c925a06094ec1cda85fb24360160fa3bb4dd444708a269d26e7737891c28eb96f6003a891eeeeac83bf767c8ae22efcd6224a823f2ea6b61862a38d4d996ed9424dcd5e52d818d2eaa0a6ac86435175c9b82d5d58579ccfa41412f768577eae23b58d64aad8898f52cc229683b05a05a0fb2df169a4fff978e99f707f56d155e52d75e3d72926939218ca07aa0f6bc15c98be9e83c91cc3d86fd0d29c984af6c1bbbe59e692746c339e636ac177d09e02bd2ff8536a3b84327ff46694a3653dd6c83263195fc6640cbf86d58a5b090060c98d7c255a4fb92c4f6274ca889241c44ad2b70d5b11b7bab12c5d175cf85e1671cf2ec77f4fcbfc07cb");
+
+            mainInteractor.doRecognize("b083c358-a424-4833-bfdc-3acf0c2db056", "052a13d0-9048-4f41-8c63-4a8130ee5b3c", massImages, openOpen);
+
             int i=5;
             i=34;
         }
@@ -533,11 +552,13 @@ public class VideoStream {
 
             @Override
             public void recogOk(Map<String, String> map) {
-                Collection<String> stringCollection=map.values();
-                for(String str : stringCollection)
-                {
-                    Log.d("RECONITION    ", str);
-                }
+                    Collection<String> str = map.values();
+                    for (String col : str) {
+                        String result = getRez(col);
+                        //поделить результат распознавания наномер контейнера и исо-код
+                        String [] ResultArray = {"Empty","Empty"};
+                        
+                    }
             }
 
             @Override
@@ -578,7 +599,7 @@ public class VideoStream {
             }
             try
             {
-                //setUpMediaRecorder();
+                setUpMediaRecorder();
                 //mMediaRecorder.start();
                 SurfaceTexture mTexture = texture.getSurfaceTexture();
                 setUpMediaRecorder();
@@ -804,7 +825,7 @@ isRecordingVideo=false;
         }
         mMediaRecorder.setOutputFile(mNextVideoAbsolutePath);
 
-        CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_480P);
+        CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_1080P);
         mMediaRecorder.setVideoFrameRate(profile.videoFrameRate);
         mMediaRecorder.setVideoSize(profile.videoFrameWidth, profile.videoFrameHeight);
         mMediaRecorder.setVideoEncodingBitRate(profile.videoBitRate);
@@ -866,11 +887,23 @@ isRecordingVideo=false;
     {
         String picturePath = null;
         try {
-            picturePath = myCameras[CAMERA1].takePicture();
+             myCameras[CAMERA1].takePicture();
             return picturePath;
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
         return "";
+    }
+
+
+
+    public static void writeToFile(File file, String text) {
+        try {
+            FileWriter fw = new FileWriter(file);
+            fw.write(text);
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
