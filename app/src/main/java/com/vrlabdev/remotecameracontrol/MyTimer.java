@@ -29,10 +29,9 @@ import static android.content.Context.WIFI_SERVICE;
 public class MyTimer extends TimerTask {
 
     Context mContext=null;
-    int CodeResponse = 400;
     String ServerResponse;
     JSONObject json;
-    String mIp = "192.168.1.100";
+    String mIp = "10.128.33.90";
 
     public MyTimer(Context context)
     {
@@ -146,10 +145,7 @@ public class MyTimer extends TimerTask {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            //Log.d("JSON_Post", "Posted");
         }
-
         public boolean HostIsReachable()
         {
             return HostIsReached;
@@ -164,15 +160,6 @@ public class MyTimer extends TimerTask {
         String url = "http://"+mIp+":8080/SmartGlass";
 
         OkHttpClient client = new OkHttpClient();
-
-       /* JSONObject postdata = new JSONObject();
-        try {
-            postdata.put("mac", "1-1-1-1-1-1-1");
-            postdata.put("ip", "1.1.1.1");
-        } catch(JSONException e){
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }*/
 
         RequestBody body = RequestBody.create(MEDIA_TYPE, json.toString());
 

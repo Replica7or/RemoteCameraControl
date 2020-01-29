@@ -90,7 +90,6 @@ public class VideoStream {
     //IP МЕНЯТЬ НА СТРОЧКЕ ВЫШЕ
 
 
-
     InetAddress address;
     int port = 5005;
 
@@ -99,7 +98,6 @@ public class VideoStream {
     public static boolean flashlight = false;
     private TextureView texture;
     private CameraDevice cameraDevice;
-
 
     private boolean CameraInUse = false;
 
@@ -584,8 +582,8 @@ public class VideoStream {
                         }
                         JSONObject jsonObject = new JSONObject();
                         try {
-                            jsonObject.put("КОНТЕЙНЕР",ResultArray[0]);
-                            jsonObject.put("ИСОКОД",ResultArray[1]);
+                            jsonObject.put("ContainerNumber",ResultArray[0]);
+                            jsonObject.put("ISOcode",ResultArray[1]);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -923,15 +921,15 @@ isRecordingVideo=false;
     }
 
 
-    public File takePicture(boolean recognition)
+    public void takePicture(boolean recognition)
     {
         try {
              myCameras[CAMERA1].takePicture(recognition);
-            return file;
+            //return file;
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
-        return null;
+        //return null;
     }
 
 

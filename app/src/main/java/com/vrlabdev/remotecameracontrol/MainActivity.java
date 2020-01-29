@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.SurfaceTexture;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.TextureView;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -24,20 +26,25 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
+    private HandlerThread mBackgroundThread;
+    
     TextureView textureView;
     EditText editText;
 
     Timer timer=null;
-    String serverip="192.168.1.100";
+    String serverip="10.128.33.90";       //TODO: для работы в порту
+    //String serverip="192.168.31.182";     //TODO: для работы в лабе
 
 
     private Handler mUiHandler = new Handler();
+    private Handler mBackgroundHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         textureView = findViewById(R.id.textureView);
         editText =findViewById(R.id.editText);
@@ -62,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         );
-
         myThread.start();
         startIpSender();
 
@@ -150,5 +156,20 @@ public class MainActivity extends AppCompatActivity {
     private void startIpSender() {
         timer = new Timer();
         timer.schedule(new MyTimer(getApplicationContext(),serverip), 0, 15000);
+    }
+
+    private void startBackgroundThread() {
+        mBackgroundThread = new HandlerThread("CameraBackground");
+        mBackgroundThread.start();
+        mBackgroundHandler = new Handler(mBackgroundThread.getLooper());
+    }
+
+    private void stopBackgroundThread() throws InterruptedException
+    {
+        mBackgroundThread.quitSafely();
+
+        mBackgroundThread.join();
+        mBackgroundThread = null;
+        mBackgroundHandler = null;
     }
 }
