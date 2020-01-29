@@ -8,7 +8,7 @@ public class CameraControlChannel {
     public VideoStream stream;
     public boolean isBusy = false;
 
-    JSONObject recognitionResult = null;
+    public JSONObject recognitionResult = null;
 
     public static CameraControlChannel getControl() {
         return ourInstance;

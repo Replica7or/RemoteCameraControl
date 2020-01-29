@@ -149,6 +149,6 @@ public class MainActivity extends AppCompatActivity {
      **/
     private void startIpSender() {
         timer = new Timer();
-        timer.schedule(new MyTimer(getApplicationContext(),serverip), 0, 5000);
+        timer.schedule(new MyTimer(getApplicationContext(),serverip), 0, 15000);
     }
 }

@@ -51,7 +51,11 @@ import java.util.Map;
 import com.codevog.android.license_library.MainInteractor;
 import com.codevog.android.license_library.MainInteractorImpl;
 import com.codevog.android.license_library.client_side_exception.BaseOcrException;
+import com.vrlabdev.remotecameracontrol.File_Post;
 import com.vrlabdev.remotecameracontrol.MainActivity;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 public class VideoStream {
@@ -98,7 +102,6 @@ public class VideoStream {
 
 
     private boolean CameraInUse = false;
-    public boolean recognition = false;
 
     private static final SparseIntArray ORIENTATONS = new SparseIntArray();
     static {
@@ -420,7 +423,7 @@ public class VideoStream {
 
 
 
-        private void takePicture() throws CameraAccessException
+        private void takePicture(final boolean recognition) throws CameraAccessException
         {
             if (myCameras[CAMERA1] == null) {
                 //return "";
@@ -430,8 +433,8 @@ public class VideoStream {
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
 
 
-            int width = 4608;
-            int height = 3456;
+            int width = 1920;//4608;
+            int height = 1440;//3456;
 
 
             final ImageReader reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 1);
@@ -466,7 +469,7 @@ public class VideoStream {
                     buffer.get(bytes);
 
                     try {
-                        save(bytes);
+                        save(bytes,recognition);
                     } catch (IOException e) {
                         e.printStackTrace();
                     } finally {
@@ -519,7 +522,7 @@ public class VideoStream {
 
 
 
-        private void save (final byte[] bytes) throws IOException
+        private void save (final byte[] bytes,boolean recognition) throws IOException
         {
             OutputStream outputStream = null;
 
@@ -533,15 +536,17 @@ public class VideoStream {
 
 
 
-            CameraControlChannel.getControl().isBusy=false;
+
             try {
                 Thread.sleep(200);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            if(recognition)
+            if(!recognition)
             {
                 CameraControlChannel.getControl().isBusy=false;
+                File_Post filePost = new File_Post();
+                filePost.TransieveFile(file,"destinationFolder");
                 return;        //если просто сделать фото, то закончить функцию здесь. Если с распознавнаием, то выполнять дальше
             }
 
@@ -571,9 +576,23 @@ public class VideoStream {
                     Collection<String> str = map.values();
                     for (String col : str) {
                         String result = getRez(col);
+                        Log.d("QQQQQQQQQQQQQ",result);
                         //поделить результат распознавания наномер контейнера и исо-код
                         String [] ResultArray = {"Empty","Empty"};
+                        if(result.contains(":")) {
+                            ResultArray = result.split(" : ");
+                        }
+                        JSONObject jsonObject = new JSONObject();
+                        try {
+                            jsonObject.put("КОНТЕЙНЕР",ResultArray[0]);
+                            jsonObject.put("ИСОКОД",ResultArray[1]);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        CameraControlChannel.getControl().recognitionResult=jsonObject;
 
+                        File_Post filePost = new File_Post();
+                        filePost.TransieveFile(file,"destinationFolder");
                         CameraControlChannel.getControl().isBusy=false;
                     }
             }
@@ -581,6 +600,8 @@ public class VideoStream {
             @Override
             public void recogError(BaseOcrException e) {
                 Log.d("ERROR ERROR    ", e.getMessage());
+                File_Post filePost = new File_Post();
+                filePost.TransieveFile(file,"destinationFolder");
                 CameraControlChannel.getControl().isBusy=false;
             }
 
@@ -688,7 +709,7 @@ isRecordingVideo=false;
             }
 
             mNextVideoAbsolutePath = null;
-            startDrawing();
+            //startDrawing();
         }
     }
 
@@ -902,18 +923,15 @@ isRecordingVideo=false;
     }
 
 
-    public String takePicture()
+    public File takePicture(boolean recognition)
     {
-        //recognition=isRecognition;
-
-        String picturePath = null;
         try {
-             myCameras[CAMERA1].takePicture();
-            return picturePath;
+             myCameras[CAMERA1].takePicture(recognition);
+            return file;
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
-        return "";
+        return null;
     }
 
 

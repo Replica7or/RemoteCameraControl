@@ -2,6 +2,7 @@ package com.vrlabdev.remotecameracontrol;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Camera;
 import android.os.Handler;
 import android.view.Gravity;
 import android.widget.Toast;
@@ -10,17 +11,19 @@ import com.vrlabdev.remotecameracontrol.CameraStream.CameraControlChannel;
 import com.vrlabdev.remotecameracontrol.CameraStream.CameraMode;
 import com.vrlabdev.remotecameracontrol.CameraStream.VideoStream;
 
+import java.io.File;
 import java.io.IOException;
 
 import fi.iki.elonen.NanoHTTPD;
 
 public class MyHTTPD extends NanoHTTPD {
-    public static final int PORT = 8765;
+    public static final int PORT = 1234;//8765
 
     Context mContext=null;
     Activity mActivity = null;
 
     boolean recognition=false;
+    private File file;
 
     private Handler mUiHandler = new Handler();
 
@@ -49,7 +52,7 @@ public class MyHTTPD extends NanoHTTPD {
                         public void run() {
                             CameraControlChannel.getControl().stream = new VideoStream(mContext, mActivity);
                             recognition=false;
-                            CameraControlChannel.getControl().stream.takePicture();
+                            file = CameraControlChannel.getControl().stream.takePicture(false);
                             //CameraControlChannel.getControl().stream.CameraStart(CameraMode.STREAM_DRAWING_SURFACE_MODE);
                         }
                     });
@@ -62,12 +65,6 @@ public class MyHTTPD extends NanoHTTPD {
             while(CameraControlChannel.getControl().isBusy){}
 
 
-
-           /* try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
            showToast("method is TakePhoto");
             return newFixedLengthResponse(response);
         }
@@ -105,11 +102,14 @@ public class MyHTTPD extends NanoHTTPD {
                 public void run() {
                     CameraControlChannel.getControl().stream = new VideoStream(mContext,mActivity);
                     recognition = true;
-                    CameraControlChannel.getControl().stream.takePicture();
+                    file = CameraControlChannel.getControl().stream.takePicture(true);
                 }
             });
         }
-        String response = "recognition";
+
+
+        while(CameraControlChannel.getControl().isBusy){}
+        String response = CameraControlChannel.getControl().recognitionResult.toString();   //TODO : протестировать это!!!1
         showToast("method is GetRecogResult");
         return newFixedLengthResponse(response);
     }

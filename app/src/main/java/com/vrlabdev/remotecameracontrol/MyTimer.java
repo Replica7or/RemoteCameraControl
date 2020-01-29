@@ -56,14 +56,12 @@ public class MyTimer extends TimerTask {
         json = new JSONObject();
         try
         {
-            json.put("MAC_address", MACaddress);
-            json.put("IP_address", IPaddress);
+            json.put("Mac", MACaddress);
+            json.put("Ip", IPaddress);
         } catch (JSONException e)
         {
             e.printStackTrace();
         }
-
-
 
         try
         {
