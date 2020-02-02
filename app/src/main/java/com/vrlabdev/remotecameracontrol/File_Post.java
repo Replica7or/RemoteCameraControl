@@ -2,6 +2,8 @@ package com.vrlabdev.remotecameracontrol;
 
 import android.util.Log;
 
+import com.vrlabdev.remotecameracontrol.CameraStream.CameraControlChannel;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,7 +41,9 @@ public class File_Post {
             String path = "Photos_"+"photos"+"_"+"recognition"+"_"+(new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(new Date())).toString()+".jpg";
 
             //TODO: раскомментировать здесь для работы с портом
-            MultipartBody multipartBody = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("userfile", path, RequestBody.Companion.create(file,MEDIA_TYPE_PNG)).build();
+            MultipartBody multipartBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM).addFormDataPart("userfile",CameraControlChannel.getControl().filename+".jpg",
+                    RequestBody.Companion.create(file,MEDIA_TYPE_PNG)).build();
 
             Request request = new Request.Builder().url(m_Url)
                     .addHeader("Content-type","multipart/form-data")

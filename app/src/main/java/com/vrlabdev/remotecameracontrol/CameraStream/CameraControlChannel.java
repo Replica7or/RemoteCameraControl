@@ -10,6 +10,8 @@ public class CameraControlChannel {
 
     public JSONObject recognitionResult = null;
 
+    public String filename=null;
+
     public static CameraControlChannel getControl() {
         return ourInstance;
     }

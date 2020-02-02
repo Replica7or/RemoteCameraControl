@@ -22,6 +22,7 @@ import fi.iki.elonen.NanoHTTPD;
 import  fi.iki.elonen.router.RouterNanoHTTPD;
 import okhttp3.Response;
 
+
 public class MyHTTPD extends RouterNanoHTTPD {
     public static final int PORT = 1234;//8765
 
@@ -32,12 +33,23 @@ public class MyHTTPD extends RouterNanoHTTPD {
 
     private Handler mUiHandler = new Handler();
 
+    StoreHandler storeHandler;
+
+    // ТЕСТОВАЯ ПОЕБЕНЬ \\
+    public static class StoreHandler extends GeneralHandler {
+        @Override
+        public Response get(
+                UriResource uriResource, Map<String, String> urlParams, IHTTPSession session) {
+            return newFixedLengthResponse("Retrieving store for id = "
+                    + urlParams.get("storeId"));
+        }
+    }
 
     public MyHTTPD()
     {
         super(PORT);
         addMappings();
-
+        storeHandler = new StoreHandler();
     }
 
     public void setmContext(Context context)
@@ -45,6 +57,11 @@ public class MyHTTPD extends RouterNanoHTTPD {
         mContext=context;
     }
     public void setmActivity(Activity activity){mActivity=activity;}
+
+    public MyHTTPD(int port)
+    {
+        super(port);
+    }
 
     @Override
     public void addMappings() {
@@ -56,8 +73,6 @@ public class MyHTTPD extends RouterNanoHTTPD {
     @Override
     public Response serve(NanoHTTPD.IHTTPSession session) {
         String uri = session.getUri();
-        String uri1 = session.getQueryParameterString();
-
         //================================================
         //===========      сделать фото      =============
         //================================================
@@ -72,6 +87,9 @@ public class MyHTTPD extends RouterNanoHTTPD {
             }
             serverIsBusy=true;
             CameraControlChannel.getControl().isBusy=true;
+
+            String randName = uri.substring(10);//костыль TODO: исправить
+            CameraControlChannel.getControl().filename = randName;
 
             Thread myThread = new Thread(new Runnable() {
                 @Override
@@ -90,10 +108,17 @@ public class MyHTTPD extends RouterNanoHTTPD {
             myThread.start();
 
             while(CameraControlChannel.getControl().isBusy){}
+            //===========================
+            CameraControlChannel.getControl().recognitionResult = new JSONObject();
+            try
+            {
+                CameraControlChannel.getControl().recognitionResult.put("Link",randName);
+            } catch (JSONException e) { e.printStackTrace(); }
+            //===========================
 
             serverIsBusy = false;
             showToast("method is TakePhoto");
-            return newFixedLengthResponse("Photo taken");
+            return newFixedLengthResponse(CameraControlChannel.getControl().recognitionResult.toString());
         }
 
 
@@ -116,6 +141,9 @@ public class MyHTTPD extends RouterNanoHTTPD {
             serverIsBusy=true;
             CameraControlChannel.getControl().isBusy=true;
 
+            String randName = uri.substring(15);//костыль TODO: исправить
+            CameraControlChannel.getControl().filename = randName;
+
             Thread myThread = new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -131,6 +159,14 @@ public class MyHTTPD extends RouterNanoHTTPD {
             myThread.start();
 
             while(CameraControlChannel.getControl().isBusy){}
+
+            //=========
+            try
+            {
+                CameraControlChannel.getControl().recognitionResult.put("Link",randName);
+            }
+            catch (JSONException e) { e.printStackTrace(); }
+            //=========
 
             String response = CameraControlChannel.getControl().recognitionResult.toString();
 

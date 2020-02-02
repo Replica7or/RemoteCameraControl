@@ -879,7 +879,7 @@ isRecordingVideo=false;
         }
         mMediaRecorder.setOutputFile(mNextVideoAbsolutePath);
 
-        CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_2160P);
+        CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_720P);
         mMediaRecorder.setVideoFrameRate(profile.videoFrameRate);
         mMediaRecorder.setVideoSize(profile.videoFrameWidth, profile.videoFrameHeight);
         mMediaRecorder.setVideoEncodingBitRate(profile.videoBitRate);
