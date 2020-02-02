@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
 
     Timer timer=null;
-    String serverip="10.128.33.90";       //TODO: для работы в порту
-    //String serverip="192.168.31.182";     //TODO: для работы в лабе
+    //String serverip="10.128.33.90";       //TODO: для работы в порту
+    String serverip="192.168.31.182";     //TODO: для работы в лабе
 
 
     private Handler mUiHandler = new Handler();
@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                             myHTTPD = new MyHTTPD();
                             myHTTPD.setmContext(getApplicationContext());
                             myHTTPD.setmActivity(MainActivity.this);
+
                             myHTTPD.start();
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                     CameraControlChannel.getControl().stream.SetTargetSurface(textureView);
                     CameraControlChannel.getControl().stream.CameraBuild(CameraMode.DRAWING_SURFACE_MODE);
                     CameraControlChannel.getControl().stream.StartCamera();
+                    CameraControlChannel.getControl().stream.StopDrawing();
                 }
                 catch(Exception e)
                 {

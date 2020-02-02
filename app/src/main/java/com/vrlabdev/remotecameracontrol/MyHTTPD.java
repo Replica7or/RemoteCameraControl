@@ -3,10 +3,12 @@ package com.vrlabdev.remotecameracontrol;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
 import com.vrlabdev.remotecameracontrol.CameraStream.CameraControlChannel;
+import com.vrlabdev.remotecameracontrol.CameraStream.CameraMode;
 import com.vrlabdev.remotecameracontrol.CameraStream.VideoStream;
 
 import org.json.JSONException;
@@ -14,10 +16,13 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 
 import fi.iki.elonen.NanoHTTPD;
+import  fi.iki.elonen.router.RouterNanoHTTPD;
+import okhttp3.Response;
 
-public class MyHTTPD extends NanoHTTPD {
+public class MyHTTPD extends RouterNanoHTTPD {
     public static final int PORT = 1234;//8765
 
     Context mContext=null;
@@ -31,6 +36,8 @@ public class MyHTTPD extends NanoHTTPD {
     public MyHTTPD()
     {
         super(PORT);
+        addMappings();
+
     }
 
     public void setmContext(Context context)
@@ -38,15 +45,27 @@ public class MyHTTPD extends NanoHTTPD {
         mContext=context;
     }
     public void setmActivity(Activity activity){mActivity=activity;}
+
     @Override
-    public Response serve(IHTTPSession session) {
+    public void addMappings() {
+        super.addMappings();
+        addRoute("/", MyHTTPD.class);
+    }
+
+
+    @Override
+    public Response serve(NanoHTTPD.IHTTPSession session) {
         String uri = session.getUri();
+        String uri1 = session.getQueryParameterString();
 
         //================================================
         //===========      сделать фото      =============
         //================================================
 
-        if (uri.equals("/TakePhoto")) {
+
+
+        if (uri.contains("/TakePhoto")) {
+
             if(serverIsBusy)
             {
                 return newFixedLengthResponse("Please wait. Camera is busy now");
@@ -170,8 +189,6 @@ public class MyHTTPD extends NanoHTTPD {
     }
 
 
-
-
     private void showToast(String text) {
         final String ftext = text;
         Thread myThread = new Thread(new Runnable() {
@@ -189,5 +206,24 @@ public class MyHTTPD extends NanoHTTPD {
         }
         );
         myThread.start();
+    }
+
+
+
+    public static class UserHandler extends GeneralHandler {
+        @Override
+        public String getText() {
+            return "UserA, UserB, UserC";
+        }
+
+        @Override
+        public String getMimeType() {
+            return MIME_PLAINTEXT;
+        }
+
+        @Override
+        public Response.IStatus getStatus() {
+            return Response.Status.OK;
+        }
     }
 }

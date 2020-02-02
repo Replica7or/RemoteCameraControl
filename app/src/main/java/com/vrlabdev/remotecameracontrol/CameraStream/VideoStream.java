@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.StrictMode;
 import android.util.Log;
+import android.util.Size;
 import android.util.SparseIntArray;
 import android.view.Surface;
 import android.view.TextureView;
@@ -247,17 +248,17 @@ public class VideoStream {
                 cameraDevice = mCameraDevice;
                 Log.i(LOG_TAG, "Open camera  with id:" + mCameraDevice.getId());
 
-                /*try {
+                try {
                     setUpMediaRecorder();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }*/
+                }
 
 
                 //
                 //раскомментировать это, если нужно постоянное изображение с камеры
                 //
-                /*switch (CameraMode) {
+                switch (CameraMode) {
                     case 0:
                         startDrawing();
                         break;
@@ -267,7 +268,7 @@ public class VideoStream {
                     case 2:
                         startDrawingAndStream();
                         break;
-                }*/
+                }
             }
 
             @Override
@@ -289,7 +290,7 @@ public class VideoStream {
          */
         private void startDrawing() {
             SurfaceTexture surfacetexture = texture.getSurfaceTexture();
-            surfacetexture.setDefaultBufferSize(1920, 1080);             //МИХАЛЫЧ ЭТО ЖЕ НАСТРОЙКА РАЗРЕШЕНИЯ КАМЕРЫ!!!!!!!!!!!1111111одиндинраз
+            surfacetexture.setDefaultBufferSize(4096, 3072);             //МИХАЛЫЧ ЭТО ЖЕ НАСТРОЙКА РАЗРЕШЕНИЯ КАМЕРЫ!!!!!!!!!!!1111111одиндинраз
             surface = new Surface(surfacetexture);
 
             try {
@@ -419,10 +420,7 @@ public class VideoStream {
         }
 
 
-
-
-        private void takePicture(final boolean recognition) throws CameraAccessException
-        {
+        private void takePicture(final boolean recognition) throws CameraAccessException {
             if (myCameras[CAMERA1] == null) {
                 //return "";
             }
@@ -430,12 +428,17 @@ public class VideoStream {
 
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
 
+            Size[] jpegSizes = null;
 
-            int width = 1920;//4608;
-            int height = 1440;//3456;
+            jpegSizes = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP).getOutputSizes(ImageFormat.JPEG);
 
+Log.d("QQQ",String.valueOf(jpegSizes.length));
+
+            int width = 3840;
+            int height = 2160;
 
             final ImageReader reader = ImageReader.newInstance(width, height, ImageFormat.JPEG, 1);
+
             List<Surface> outputSurfaces = new ArrayList<>(2);
             outputSurfaces.add(reader.getSurface());
 
@@ -444,17 +447,22 @@ public class VideoStream {
             final CaptureRequest.Builder captureBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
 
             captureBuilder.addTarget(reader.getSurface());
-            captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
+            //captureBuilder.set(CaptureRequest.CONTROL_MODE, CameraMetadata.CONTROL_MODE_AUTO);
+            captureBuilder.set(CaptureRequest.NOISE_REDUCTION_MODE, CameraMetadata.NOISE_REDUCTION_MODE_HIGH_QUALITY);
+            captureBuilder.set(CaptureRequest.CONTROL_AF_MODE, CameraMetadata.CONTROL_AF_MODE_OFF);
+            captureBuilder.set(CaptureRequest.CONTROL_AWB_MODE, CameraMetadata.CONTROL_AWB_MODE_DAYLIGHT);
 
 
-            int rotation = ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
+
+
+            //int rotation = ((WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
             //captureBuilder.set(CaptureRequest.JPEG_ORIENTATION, ORIENTATONS.get(rotation));
 
 
             Long tsLong = System.currentTimeMillis() / 1000;
             String ts = tsLong.toString();
 
-            file = new File(Environment.getExternalStorageDirectory() + "/" + ts + ".png");
+            file = new File(Environment.getExternalStorageDirectory() + "/" + ts + ".jpg");
 
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
@@ -472,14 +480,19 @@ public class VideoStream {
                         e.printStackTrace();
                     } finally {
                         if (image != null) {
-                            image.close();
+                            try {
+                                image.close();
+                            }catch (Exception ex)
+                            {
+                                Log.d("ERRRRRROOOOOR", ex.getMessage());
+                            }
                         }
                     }
                 }
             };
 
 
-            reader.setOnImageAvailableListener(readerListener,mBackgroundHandler);
+            reader.setOnImageAvailableListener(readerListener,null);
 
 
             final CameraCaptureSession.CaptureCallback captureListener = new CameraCaptureSession.CaptureCallback() {
@@ -544,7 +557,7 @@ public class VideoStream {
             {
                 CameraControlChannel.getControl().isBusy=false;
                 File_Post filePost = new File_Post();
-                filePost.TransieveFile(file,"destinationFolder");
+                //filePost.TransieveFile(file,"destinationFolder");
                 return;        //если просто сделать фото, то закончить функцию здесь. Если с распознавнаием, то выполнять дальше
             }
 
@@ -743,6 +756,8 @@ isRecordingVideo=false;
 
     public void SetTargetSurface(TextureView textureView) {
         texture = textureView;
+
+
     }
 
 
@@ -754,11 +769,11 @@ isRecordingVideo=false;
             Log.i(LOG_TAG, "нету кодека");
         }
 
-        int width = 1920; // ширина видео
-        int height = 1080; // высота видео
+        int width = 3840; // ширина видео
+        int height = 2160; // высота видео
         int colorFormat = MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface; // формат ввода цвета
-        int videoBitrate = 15000000; // битрейт видео в bps (бит в секунду)
-        int videoFramePerSecond = 30; // FPS
+        int videoBitrate = 20000000; // битрейт видео в bps (бит в секунду)
+        int videoFramePerSecond = 10; // FPS
         int iframeInterval = 1; // I-Frame интервал в секундах
 
         MediaFormat format = MediaFormat.createVideoFormat("video/avc", width, height);
@@ -773,6 +788,7 @@ isRecordingVideo=false;
 
         mCodec.setCallback(new EncoderCallback());
         mCodec.start(); // запускаем кодер
+
         Log.i(LOG_TAG, "запустили кодек");
     }
 
@@ -863,7 +879,7 @@ isRecordingVideo=false;
         }
         mMediaRecorder.setOutputFile(mNextVideoAbsolutePath);
 
-        CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_1080P);
+        CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_2160P);
         mMediaRecorder.setVideoFrameRate(profile.videoFrameRate);
         mMediaRecorder.setVideoSize(profile.videoFrameWidth, profile.videoFrameHeight);
         mMediaRecorder.setVideoEncodingBitRate(profile.videoBitRate);
