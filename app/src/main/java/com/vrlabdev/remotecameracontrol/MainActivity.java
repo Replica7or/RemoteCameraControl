@@ -19,10 +19,8 @@ import java.io.IOException;
 import java.util.Timer;
 
 import com.vrlabdev.remotecameracontrol.CameraStream.CameraControlChannel;
-import com.vrlabdev.remotecameracontrol.CameraStream.CameraMode;
 import com.vrlabdev.remotecameracontrol.CameraStream.VideoStream;
 
-import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     Timer timer=null;
     //String serverip="10.128.33.90";       //TODO: для работы в порту
-    String serverip="192.168.31.182";     //TODO: для работы в лабе
+    String serverip="192.168.31.142";     //TODO: для работы в лабе
 
 
     private Handler mUiHandler = new Handler();
@@ -55,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 mUiHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        MyHTTPD myHTTPD = null;
+                        MyHTTPD myHTTPD;
                         try {
                             myHTTPD = new MyHTTPD();
                             myHTTPD.setmContext(getApplicationContext());
@@ -81,23 +79,16 @@ public class MainActivity extends AppCompatActivity {
             public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
 
                 try {
-                    CameraControlChannel.getControl().stream = new VideoStream(getApplicationContext(),MainActivity.this);
-                    CameraControlChannel.getControl().stream.SetTargetSurface(textureView);
-                    CameraControlChannel.getControl().stream.CameraBuild(CameraMode.DRAWING_SURFACE_MODE);
-                    CameraControlChannel.getControl().stream.StartCamera();
-                    CameraControlChannel.getControl().stream.StopDrawing();
+                    if(!CameraControlChannel.getControl().isBusy) {
+                        CameraControlChannel.getControl().stream = new VideoStream(getApplicationContext(), MainActivity.this);
+                        CameraControlChannel.getControl().stream.SetTargetSurface(textureView);
+                        CameraControlChannel.getControl().stream.CameraBuild();
+                        CameraControlChannel.getControl().stream.StartDrawing();
+                    }
                 }
                 catch(Exception e)
                 {
-                    try {
-
-                    }
-                    catch (Exception e1)
-                    {
-
-                        showToast("камера недоступна");
-                        Log.e("ERROR", e.getMessage().toString());
-                    }
+                    Log.e("ERROR", ""+e.getMessage());
                 }
             }
 

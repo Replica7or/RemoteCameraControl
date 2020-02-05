@@ -5,7 +5,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.text.format.Formatter;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,26 +27,21 @@ import static android.content.Context.WIFI_SERVICE;
 
 public class MyTimer extends TimerTask {
 
-    Context mContext=null;
-    String ServerResponse;
-    JSONObject json;
-    String mIp = "10.128.33.90";
+    private Context mContext;
+    private JSONObject json;
+    private String mIp;
 
-    public MyTimer(Context context)
-    {
-        mContext=context;
-    }
-
-    public MyTimer(Context context, String ip)
+    MyTimer(Context context, String ip)
     {
         mContext=context;
         mIp=ip;
     }
+
     @Override
     public void run()
     {
-
-        WifiManager manager = (WifiManager) mContext.getSystemService(WIFI_SERVICE);
+        WifiManager manager = (WifiManager) mContext.getApplicationContext().getSystemService(WIFI_SERVICE);
+        assert manager != null;
         WifiInfo info = manager.getConnectionInfo();
         String IPaddress = Formatter.formatIpAddress(info.getIpAddress());
         String MACaddress =getMacAddr();
@@ -61,20 +55,11 @@ public class MyTimer extends TimerTask {
         {
             e.printStackTrace();
         }
-
-        try
-        {
-            postRequest();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
+        postRequest();
         Log.d("JSON_adresses", String.valueOf(json));
-
     }
 
-    public static String getMacAddr() {
+    private static String getMacAddr() {
         try {
             List<NetworkInterface> all = Collections.list(NetworkInterface.getNetworkInterfaces());
             for (NetworkInterface nif : all) {
@@ -101,60 +86,11 @@ public class MyTimer extends TimerTask {
         return "";
     }
 
-    class THREAD implements Runnable {
-        public boolean HostIsReached;   //if IsReached Var = 1. If NotIsReached Var=0;
-
-        public final MediaType mediaType = MediaType.parse("application/json; charset=utf-8");
-
-        String URL = "http://"+mIp+":8080/SmartGlass";
-        String message = String.valueOf(json);
-
-        @Override
-        public void run()
-        {
-            OkHttpClient client = new OkHttpClient();
-            //Log.d("POST_JSON", message);
-            RequestBody body = RequestBody.create(mediaType, message);
-            Request request = new Request.Builder().url(URL)
-                    .post(body)
-                    .header("Accept", "application/json")
-                    .header("Content-Type", "application/json")
-                    .build();
-            Response response =null;
-            Log.d("QWEQR", request.toString());
-            client.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    String mMessage = e.getMessage().toString();
-                    Log.w("failure Response", mMessage);
-                    //call.cancel();
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-
-                    String mMessage = response.body().string();
-                    Log.e("RESPONSE     ", mMessage);
-                }
-            });
-
-
-            try {
-                ServerResponse = response.body().string();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        public boolean HostIsReachable()
-        {
-            return HostIsReached;
-        }
-    }
 
 
 
-    public void postRequest() throws IOException {
+
+    private void postRequest(){
 
         MediaType MEDIA_TYPE = MediaType.parse("application/json");
         String url = "http://"+mIp+":8080/SmartGlass";
@@ -173,8 +109,7 @@ public class MyTimer extends TimerTask {
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                String mMessage = e.getMessage().toString();
-                Log.w("failure Response", mMessage);
+                Log.w("failure Response", ""+e.getMessage());
                 //call.cancel();
             }
 

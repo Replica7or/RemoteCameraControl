@@ -29,7 +29,7 @@ public class JSON_PostRequest {
             try
             {
                 json.put("CallSign", "");
-                json.put("VoyageNumber", "049/050");
+                json.put("VoyageNumber", "");
             } catch (Exception e)
             {
 

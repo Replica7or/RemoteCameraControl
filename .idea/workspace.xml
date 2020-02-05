@@ -10,10 +10,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d174f1b-85eb-415f-9ae2-44c3565cc958" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/SessionStack.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
@@ -21,12 +24,89 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__artifacts_licensed_ocr_engine_release_unspecified_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__artifacts_licensed_ocr_engine_release_unspecified_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RemoteCameraControl.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RemoteCameraControl.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/vrlabdev/remotecameracontrol/BuildConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/vrlabdev/remotecameracontrol/BuildConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/bundle_manifest/debug/processDebugManifest/bundle-manifest/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/6K4mhSwsG2ObnbphK7IOxx64z+A=" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/6K4mhSwsG2ObnbphK7IOxx64z+A=" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/instant_app_manifest/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/CameraControlChannel.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/CameraControlChannel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/CameraMode.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/CameraMode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$OpenOpen.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$OpenOpen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$EncoderCallback.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$EncoderCallback.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/File_Post.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/File_Post.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/JSON_PostRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/JSON_PostRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MainActivity$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MainActivity$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MainActivity$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MainActivity$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MainActivity$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MainActivity$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MainActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MainActivity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$5$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$5$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$UserHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD$UserHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/vrlabdev/remotecameracontrol/MyHTTPD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/manifest_merge_blame_file/debug/manifest-merger-blame-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/merged_manifests/debug/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/processed_res/debug/processDebugResources/out/resources-debug.ap_" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/processed_res/debug/processDebugResources/out/resources-debug.ap_" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/CameraControlChannel.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/CameraControlChannel.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/CameraMode.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/CameraMode.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$2.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$3.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$3.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$4.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$4.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$5.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$5.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$6.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$6.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$7.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$8.dex" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$OpenOpen.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService$OpenOpen.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$CameraService.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$EncoderCallback.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream$EncoderCallback.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/File_Post.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/File_Post.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/JSON_PostRequest.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/JSON_PostRequest.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MainActivity$1$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MainActivity$1$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MainActivity$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MainActivity$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MainActivity$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MainActivity$2.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MainActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MainActivity.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$1$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$1$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$2$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$2$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$2.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$2.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$3.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$3.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$4.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$4.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$5$1.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$5$1.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$5.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$5.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$UserHandler.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD$UserHandler.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/transforms/dexBuilder/debug/0/com/vrlabdev/remotecameracontrol/MyHTTPD.dex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/CameraControlChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/CameraControlChannel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/CameraMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/CameraMode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/FileWork.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/FileWork.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/File_Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/File_Post.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/JSON_PostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/JSON_PostRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyHTTPD.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyHTTPD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyTimer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/licensed-ocr-engine-release/licensed-ocr-engine-release.iml" beforeDir="false" afterPath="$PROJECT_DIR$/licensed-ocr-engine-release/licensed-ocr-engine-release.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -38,12 +118,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="ZW3222WLD8" />
-  <component name="ExternalProjectsData">
-    <projectState path="$PROJECT_DIR$">
-      <ProjectState />
-    </projectState>
-  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_5X_API_29_x86" />
   <component name="ExternalProjectsManager">
     <system id="GRADLE">
       <state>
@@ -54,22 +129,14 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyHTTPD.java">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="682">
-              <caret line="167" column="12" selection-start-line="167" selection-start-column="12" selection-end-line="167" selection-end-column="12" />
+            <state relative-caret-position="291">
+              <caret line="139" column="17" selection-start-line="139" selection-start-column="17" selection-end-line="139" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#3522#3523#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/CameraControlChannel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" selection-start-line="13" selection-end-line="13" />
             </state>
           </provider>
         </entry>
@@ -77,64 +144,117 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-316">
-              <caret line="558" column="23" selection-start-line="558" selection-start-column="16" selection-end-line="558" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/File_Post.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-51">
-              <caret line="44" column="76" lean-forward="true" selection-start-line="44" selection-start-column="76" selection-end-line="44" selection-end-column="76" />
+            <state relative-caret-position="281">
+              <caret line="110" column="35" lean-forward="true" selection-start-line="110" selection-start-column="35" selection-end-line="110" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4945#4946#0" expanded="true" />
+                <element signature="e#5048#5049#0" expanded="true" />
+                <element signature="e#10291#11129#0" expanded="true" />
+                <element signature="e#11128#11129#0" expanded="true" />
+                <element signature="e#11930#12588#0" expanded="true" />
+                <element signature="e#12587#12588#0" expanded="true" />
+                <element signature="e#22045#22046#0" expanded="true" />
+                <element signature="e#22082#22083#0" expanded="true" />
+                <element signature="class#EncoderCallback#0;class#VideoStream#0" />
+                <element signature="e#24176#24177#0" expanded="true" />
+                <element signature="e#24231#24232#0" expanded="true" />
+                <element signature="method#startBackgroundThread#0;class#VideoStream#0" />
+                <element signature="method#stopBackgroundThread#0;class#VideoStream#0" />
+                <element signature="method#takePicture#0;class#VideoStream#0" />
+                <element signature="method#writeToFile#0;class#VideoStream#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyTimer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" column="62" selection-start-line="31" selection-start-column="62" selection-end-line="31" selection-end-column="62" />
+            <state relative-caret-position="240">
+              <caret line="38" selection-start-line="38" selection-end-line="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyHTTPD.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="555">
+              <caret line="168" column="13" lean-forward="true" selection-start-line="168" selection-start-column="13" selection-end-line="168" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="class#StoreHandler#0;class#MyHTTPD#0" />
+                <element signature="method#addMappings#0;class#MyHTTPD#0" />
+                <element signature="e#5437#5926#0" expanded="true" />
+                <element signature="e#5552#5892#0" expanded="true" />
+                <element signature="e#5891#5892#0" expanded="true" />
+                <element signature="e#5925#5926#0" expanded="true" />
+                <element signature="e#6957#7395#0" expanded="true" />
+                <element signature="e#7394#7395#0" expanded="true" />
+                <element signature="e#7803#7993#0" expanded="true" />
+                <element signature="e#7992#7993#0" expanded="true" />
+                <element signature="method#showToast#0;class#MyHTTPD#0" />
+                <element signature="e#8437#8885#0" expanded="true" />
+                <element signature="e#8540#8859#0" expanded="true" />
+                <element signature="e#8858#8859#0" expanded="true" />
+                <element signature="e#8884#8885#0" expanded="true" />
+                <element signature="class#UserHandler#0;class#MyHTTPD#0" />
+                <element signature="e#9770#9771#0" expanded="true" />
+                <element signature="e#9822#9823#0" expanded="true" />
+                <element signature="e#9879#9880#0" expanded="true" />
+                <element signature="e#9924#9925#0" expanded="true" />
+                <element signature="e#9989#9990#0" expanded="true" />
+                <element signature="e#10038#10039#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>recognizeFile</find>
-      <find>480</find>
-      <find>setupmediarecorder</find>
-      <find>startrecog</find>
-      <find>pathToFile</find>
-      <find>output</find>
-      <find>lice</find>
-      <find>mUiHandler</find>
-      <find>recog</find>
-      <find>recognitio</find>
-      <find>recognition</find>
-      <find>recogni</find>
-      <find>buffer</find>
-      <find>con</find>
-      <find>error</find>
+      <find>mime</find>
+      <find>empty</find>
+      <find>file_po</find>
+      <find>file_p</find>
+      <find>setupmedia</find>
       <find>take</find>
       <find>save</find>
-      <find>file</find>
-      <find>image</find>
+      <find>capturerequest</find>
+      <find>Stop</find>
+      <find>StopCamera</find>
+      <find>EncoderCallback</find>
+      <find>upload</find>
+      <find>mmediarecorder.start</find>
+      <find>takepicture</find>
+      <find>stop</find>
+      <find>isRec</find>
+      <find>startdra</find>
+      <find>setupmediacodec</find>
+      <find>setupmediac</find>
       <find>setUpMediaCodec</find>
-      <find>reader</find>
-      <find>1920</find>
-      <find>1080</find>
-      <find>4096</find>
-      <find>surface</find>
-      <find>takepic</find>
-      <find>LOG_TAG</find>
-      <find>template</find>
-      <find>mediarecord</find>
-      <find>File_Po</find>
+      <find>cameraservice</find>
+      <find>con</find>
+      <find>mycameras</find>
+      <find>startdraw</find>
+      <find>startdea</find>
+      <find>mediacodec</find>
+      <find>session</find>
+      <find>light</find>
+      <find>StopDrawing</find>
+      <find>msession</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -146,23 +266,26 @@
         <option value="$PROJECT_DIR$/app/src/main/java/net/majorkernelpanic/remotecameracontrol/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/CameraServer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/FileWork.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyTimer.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/CameraControlChannel.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyHTTPD.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/JSON_PostRequest.java" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/SessionStack.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/SessionStack.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/CameraMode.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/File_Post.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/CameraControlChannel.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/FileWork.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyTimer.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyHTTPD.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-66" />
-    <option name="y" value="95" />
-    <option name="width" value="1386" />
-    <option name="height" value="788" />
+    <option name="x" value="321" />
+    <option name="width" value="1607" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -170,8 +293,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
-      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -205,20 +326,27 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="DeviceAndSnapshotComboBoxAction.selectedDevice" value="T8250500314" />
+    <property name="DeviceAndSnapshotComboBoxAction.selectionTime" value="2020-02-04T05:50:30.371Z" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../.." />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.vrlabdev.remotecameracontrol" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.vrlabdev.remotecameracontrol" />
     </key>
@@ -323,11 +451,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.15885022" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.18763326" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -340,59 +468,47 @@
       <window_info anchor="bottom" id="TODO" order="2" weight="0.32936078" />
       <window_info anchor="bottom" id="Find" order="3" weight="0.32827735" />
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.32936078" />
-      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.5015129" side_tool="true" visible="true" weight="0.18035427" />
+      <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.32936078" />
-      <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49848714" visible="true" weight="0.18035427" />
-      <window_info anchor="bottom" id="Debug" order="8" visible="true" weight="0.283857" />
-      <window_info anchor="bottom" id="Android Profiler" order="9" show_stripe_button="false" />
-      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" weight="0.42057487" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.17226435" />
+      <window_info anchor="bottom" id="Debug" order="8" weight="0.31960997" />
+      <window_info anchor="bottom" id="Android Profiler" order="9" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" weight="0.23187633" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info anchor="right" id="Preview" order="4" weight="0.23560767" />
       <window_info anchor="right" id="Palette&#9;" order="5" />
     </layout>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream.java</url>
-          <line>530</line>
-          <properties />
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream.java</url>
-          <line>615</line>
-          <properties />
-          <option name="timeStamp" value="95" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <layout-to-restore>
+      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.18763326" />
+      <window_info id="Structure" order="2" side_tool="true" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info id="Build Variants" order="4" side_tool="true" />
+      <window_info id="Image Layers" order="5" />
+      <window_info id="Designer" order="6" />
+      <window_info id="Resources Explorer" order="7" />
+      <window_info id="Capture Tool" order="8" />
+      <window_info anchor="bottom" id="Run" order="0" />
+      <window_info anchor="bottom" id="Logcat" order="1" weight="0.32936078" />
+      <window_info anchor="bottom" id="TODO" order="2" weight="0.32936078" />
+      <window_info anchor="bottom" id="Find" order="3" weight="0.32827735" />
+      <window_info anchor="bottom" id="Terminal" order="4" weight="0.32936078" />
+      <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="6" weight="0.32936078" />
+      <window_info anchor="bottom" id="Build" order="7" weight="0.17226435" />
+      <window_info anchor="bottom" id="Debug" order="8" visible="true" weight="0.31960997" />
+      <window_info anchor="bottom" id="Android Profiler" order="9" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" weight="0.23187633" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Gradle" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info anchor="right" id="Preview" order="4" weight="0.23560767" />
+      <window_info anchor="right" id="Palette&#9;" order="5" />
+    </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1572071668.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1572072000.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1572072008.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1572072011.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1572074445.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1572074897.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1572074913.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1572074962.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1572933769.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1573037761.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1573628078.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1573629629.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1573633167.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1573634121.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1573703745.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1573705003.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1573707050.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1576483674.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1573707401.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1576483757.jpg" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1576483979.jpg" />
     <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1576484449.jpg" />
     <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1576485039.jpg" />
     <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1576486180.jpg" />
@@ -408,7 +524,9 @@
     <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/Android/data/com.vrlabdev.tallymanhtm_demo/files/Download/5USU4_MPTU9274253_20191218_1517074755305001588043610.png" />
     <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/Android/data/com.vrlabdev.tallymanhtm_demo/files/Download/5USU4_MPTU9274253_20191218_1514383182624360429313960.png" />
     <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/Android/data/com.vrlabdev.tallymanhtm_demo/files/Download/5USU4_MPTU9274253_20191218_1608328982803237188796505.png" />
-    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/Android/data/com.vrlabdev.tallymanhtm_demo/files/Settings/settings" />
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/Android/data/com.vrlabdev.tallymanhtm_demo/files/Settings/settings">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/Android/data/com.vrlabdev.tallymanhtm_demo/files/Download/5USU4_MPTU9274253_20191217_1730212001519141904580412.png" />
     <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/Android/data/com.vrlabdev.tallymanhtm_demo/files/Download/5USU4_MPTU9274253_20191218_160943992040413918103282.png" />
     <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/Android/data/com.vrlabdev.tallymanhtm_demo/files/Download/5USU4_MPTU9274253_20200125_1730594572422499019327193.png" />
@@ -417,27 +535,113 @@
     <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/Android/data/com.vrlabdev.tallymanhtm_demo/files/Download/5USU4_MPTU9274253_20191218_1524017618875908331982485.png" />
     <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/Android/data/com.vrlabdev.tallymanhtm_demo/files/Download/5USU4_MPTU9274253_20191218_1523055927095009490052766.png" />
     <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/Android/data/com.vrlabdev.tallymanhtm_demo/files/Download/5USU4_MPTU9274253_20191218_1514051505025761347029068.png" />
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1580705186.jpg" />
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1580704828.jpg" />
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1580704554.jpg" />
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1580704494.jpg" />
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1580704443.jpg" />
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1580704388.jpg" />
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1580704209.jpg" />
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1580704726.jpg" />
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1580705104.jpg" />
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/realwear_inc_-t1100g-3d64035/sdcard/1580705195.jpg" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.nanohttpd/nanohttpd/2.3.1/c820129da77c30b2e4ea1cea619d7f589a17bcdd/nanohttpd-2.3.1-sources.jar!/fi/iki/elonen/NanoHTTPD.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="1476" column="40" selection-start-line="1476" selection-start-column="37" selection-end-line="1476" selection-end-column="40" />
+        <state relative-caret-position="203">
+          <caret line="1840" column="61" lean-forward="true" selection-start-line="1840" selection-start-column="61" selection-end-line="1840" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/os/Binder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="1020" selection-start-line="1020" selection-end-line="1020" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/AndroidStudio/DeviceExplorer/unistrong-t8-T8250500314/sdcard/1580795923.jpg" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
+        </state>
+      </provider>
+      <provider editor-type-id="android-manifest" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/JSON_PostRequest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="31" column="45" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/File_Post.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-29/android/media/MediaCodec.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="2145" column="22" selection-start-line="2145" selection-start-column="22" selection-end-line="2145" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/CameraServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/CameraMode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/jre/jre/lib/rt.jar!/java/net/SocketOutputStream.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="139" column="17" selection-start-line="139" selection-start-column="17" selection-end-line="139" selection-end-column="17" />
           <folding>
-            <element signature="e#55242#55243#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#3522#3523#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/SessionStack.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="62" selection-start-line="31" selection-start-column="62" selection-end-line="31" selection-end-column="62" />
+        <state relative-caret-position="136">
+          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyHTTPD.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/FileWork.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="167" column="12" selection-start-line="167" selection-start-column="12" selection-end-line="167" selection-end-column="12" />
+        <state relative-caret-position="102">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyTimer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -446,22 +650,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/CameraControlChannel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
+        <state relative-caret-position="119">
+          <caret line="7" column="30" lean-forward="true" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/CameraStream/VideoStream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-316">
-          <caret line="558" column="23" selection-start-line="558" selection-start-column="16" selection-end-line="558" selection-end-column="23" />
+        <state relative-caret-position="281">
+          <caret line="110" column="35" lean-forward="true" selection-start-line="110" selection-start-column="35" selection-end-line="110" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4945#4946#0" expanded="true" />
+            <element signature="e#5048#5049#0" expanded="true" />
+            <element signature="e#10291#11129#0" expanded="true" />
+            <element signature="e#11128#11129#0" expanded="true" />
+            <element signature="e#11930#12588#0" expanded="true" />
+            <element signature="e#12587#12588#0" expanded="true" />
+            <element signature="e#22045#22046#0" expanded="true" />
+            <element signature="e#22082#22083#0" expanded="true" />
+            <element signature="class#EncoderCallback#0;class#VideoStream#0" />
+            <element signature="e#24176#24177#0" expanded="true" />
+            <element signature="e#24231#24232#0" expanded="true" />
+            <element signature="method#startBackgroundThread#0;class#VideoStream#0" />
+            <element signature="method#stopBackgroundThread#0;class#VideoStream#0" />
+            <element signature="method#takePicture#0;class#VideoStream#0" />
+            <element signature="method#writeToFile#0;class#VideoStream#0" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/File_Post.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vrlabdev/remotecameracontrol/MyHTTPD.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="44" column="76" lean-forward="true" selection-start-line="44" selection-start-column="76" selection-end-line="44" selection-end-column="76" />
+        <state relative-caret-position="555">
+          <caret line="168" column="13" lean-forward="true" selection-start-line="168" selection-start-column="13" selection-end-line="168" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#StoreHandler#0;class#MyHTTPD#0" />
+            <element signature="method#addMappings#0;class#MyHTTPD#0" />
+            <element signature="e#5437#5926#0" expanded="true" />
+            <element signature="e#5552#5892#0" expanded="true" />
+            <element signature="e#5891#5892#0" expanded="true" />
+            <element signature="e#5925#5926#0" expanded="true" />
+            <element signature="e#6957#7395#0" expanded="true" />
+            <element signature="e#7394#7395#0" expanded="true" />
+            <element signature="e#7803#7993#0" expanded="true" />
+            <element signature="e#7992#7993#0" expanded="true" />
+            <element signature="method#showToast#0;class#MyHTTPD#0" />
+            <element signature="e#8437#8885#0" expanded="true" />
+            <element signature="e#8540#8859#0" expanded="true" />
+            <element signature="e#8858#8859#0" expanded="true" />
+            <element signature="e#8884#8885#0" expanded="true" />
+            <element signature="class#UserHandler#0;class#MyHTTPD#0" />
+            <element signature="e#9770#9771#0" expanded="true" />
+            <element signature="e#9822#9823#0" expanded="true" />
+            <element signature="e#9879#9880#0" expanded="true" />
+            <element signature="e#9924#9925#0" expanded="true" />
+            <element signature="e#9989#9990#0" expanded="true" />
+            <element signature="e#10038#10039#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

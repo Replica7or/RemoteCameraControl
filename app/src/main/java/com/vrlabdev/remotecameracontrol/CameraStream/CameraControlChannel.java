@@ -8,7 +8,7 @@ public class CameraControlChannel {
     public VideoStream stream;
     public boolean isBusy = false;
 
-    public JSONObject recognitionResult = null;
+    public JSONObject jsonImageData = null;
 
     public String filename=null;
 

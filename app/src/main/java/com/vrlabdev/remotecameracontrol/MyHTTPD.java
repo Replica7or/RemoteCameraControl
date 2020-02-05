@@ -8,32 +8,33 @@ import android.view.Gravity;
 import android.widget.Toast;
 
 import com.vrlabdev.remotecameracontrol.CameraStream.CameraControlChannel;
-import com.vrlabdev.remotecameracontrol.CameraStream.CameraMode;
 import com.vrlabdev.remotecameracontrol.CameraStream.VideoStream;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
 import fi.iki.elonen.NanoHTTPD;
 import  fi.iki.elonen.router.RouterNanoHTTPD;
+import okhttp3.MediaType;
 import okhttp3.Response;
 
 
 public class MyHTTPD extends RouterNanoHTTPD {
-    public static final int PORT = 1234;//8765
+    private static final int PORT = 1234;//8765
 
-    Context mContext=null;
-    Activity mActivity = null;
+    private Context mContext=null;
+    private Activity mActivity = null;
 
     private boolean serverIsBusy=false;
 
     private Handler mUiHandler = new Handler();
 
-    StoreHandler storeHandler;
+    private StoreHandler storeHandler;
+
+    private SessionStack sessionStack;
 
     // ТЕСТОВАЯ ПОЕБЕНЬ \\
     public static class StoreHandler extends GeneralHandler {
@@ -45,23 +46,19 @@ public class MyHTTPD extends RouterNanoHTTPD {
         }
     }
 
-    public MyHTTPD()
+    MyHTTPD()
     {
         super(PORT);
+        sessionStack = new SessionStack();
         addMappings();
         storeHandler = new StoreHandler();
     }
 
-    public void setmContext(Context context)
+    void setmContext(Context context)
     {
         mContext=context;
     }
-    public void setmActivity(Activity activity){mActivity=activity;}
-
-    public MyHTTPD(int port)
-    {
-        super(port);
-    }
+    void setmActivity(Activity activity){mActivity=activity;}
 
     @Override
     public void addMappings() {
@@ -69,65 +66,74 @@ public class MyHTTPD extends RouterNanoHTTPD {
         addRoute("/", MyHTTPD.class);
     }
 
-
     @Override
     public Response serve(NanoHTTPD.IHTTPSession session) {
         String uri = session.getUri();
-        //================================================
-        //===========      сделать фото      =============
-        //================================================
 
-
+        //========================  сделать фото   ================================================================================================================================
 
         if (uri.contains("/TakePhoto")) {
+            String randName = System.currentTimeMillis() / 1000 + ".jpg";
 
-            if(serverIsBusy)
+            //если камера занята
+            if(CameraControlChannel.getControl().isBusy)
             {
-                return newFixedLengthResponse("Please wait. Camera is busy now");
+                //ждем пока камера не вернет изображение
+                while (CameraControlChannel.getControl().isBusy) { }
+                CameraControlChannel.getControl().jsonImageData = JSONBuilder("Empty","Empty",randName);
+                return newFixedLengthResponse(Response.Status.OK, "application/json", CameraControlChannel.getControl().jsonImageData.toString());
             }
-            serverIsBusy=true;
-            CameraControlChannel.getControl().isBusy=true;
+            //если камера свободна
+            else {
+                if (uri.length() > 10) randName = uri.substring(11);// TODO: исправить
+                CameraControlChannel.getControl().filename = randName;
 
-            String randName = uri.substring(10);//костыль TODO: исправить
-            CameraControlChannel.getControl().filename = randName;
+                CameraControlChannel.getControl().isBusy = true;
 
-            Thread myThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    mUiHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            CameraControlChannel.getControl().stream = new VideoStream(mContext, mActivity);
-                            CameraControlChannel.getControl().stream.takePicture(false);
-                            //CameraControlChannel.getControl().stream.CameraStart(CameraMode.STREAM_DRAWING_SURFACE_MODE);
-                        }
-                    });
+                Thread takeImage = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mUiHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                CameraControlChannel.getControl().stream.takePicture(false);
+                            }
+                        });
+                    }
                 }
+                );
+                takeImage.start();
+
+                //ждем пока камера не вернет изображение
+                while (CameraControlChannel.getControl().isBusy) { }
+                CameraControlChannel.getControl().jsonImageData = JSONBuilder("Empty","Empty",randName);
+
+                showToast("method is TakePhoto");
+                return newFixedLengthResponse(Response.Status.OK, "application/json", CameraControlChannel.getControl().jsonImageData.toString());
             }
-            );
-            myThread.start();
 
-            while(CameraControlChannel.getControl().isBusy){}
-            //===========================
-            CameraControlChannel.getControl().recognitionResult = new JSONObject();
-            try
-            {
-                CameraControlChannel.getControl().recognitionResult.put("Link",randName);
-            } catch (JSONException e) { e.printStackTrace(); }
-            //===========================
-
-            serverIsBusy = false;
-            showToast("method is TakePhoto");
-            return newFixedLengthResponse(CameraControlChannel.getControl().recognitionResult.toString());
         }
 
 
-        //================================================
-        //===========   сделать фото с распознаванием  ===
-        //================================================
+        //==============  сделать фото с распознаванием ================================================================================================================================
 
-        if(uri.equals("/GetRecogResult"))
+        if(uri.contains("/GetRecogResult"))
         {
+            String randName = System.currentTimeMillis() / 1000 + ".jpg";
+
+            if(CameraControlChannel.getControl().isBusy)
+            {
+                //ждем пока камера не вернет изображение
+                while (CameraControlChannel.getControl().isBusy) { }
+                CameraControlChannel.getControl().jsonImageData = JSONBuilder("Empty","Empty",randName);
+                return newFixedLengthResponse(Response.Status.OK, "application/json", CameraControlChannel.getControl().jsonImageData.toString());
+            }
+            else {
+                if(uri.length()>16)
+                    randName = uri.substring(16); //TODO: исправить
+                CameraControlChannel.getControl().filename = randName;
+            }
+
             if(serverIsBusy) {
                 JSONObject jsonEmpty = new JSONObject();
                 try {
@@ -137,12 +143,10 @@ public class MyHTTPD extends RouterNanoHTTPD {
                     e.printStackTrace();
                 }
                 return newFixedLengthResponse(jsonEmpty.toString());
-            } //вернуть если команда уже обрабатывается
-            serverIsBusy=true;
+            }
             CameraControlChannel.getControl().isBusy=true;
 
-            String randName = uri.substring(15);//костыль TODO: исправить
-            CameraControlChannel.getControl().filename = randName;
+
 
             Thread myThread = new Thread(new Runnable() {
                 @Override
@@ -150,7 +154,7 @@ public class MyHTTPD extends RouterNanoHTTPD {
                     mUiHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            CameraControlChannel.getControl().stream = new VideoStream(mContext,mActivity);
+                            //CameraControlChannel.getControl().stream = new VideoStream(mContext,mActivity);
                             CameraControlChannel.getControl().stream.takePicture(true);
                         }
                     });
@@ -163,18 +167,17 @@ public class MyHTTPD extends RouterNanoHTTPD {
             //=========
             try
             {
-                CameraControlChannel.getControl().recognitionResult.put("Link",randName);
+                CameraControlChannel.getControl().jsonImageData.put("Link",randName);
             }
             catch (JSONException e) { e.printStackTrace(); }
             //=========
 
-            String response = CameraControlChannel.getControl().recognitionResult.toString();
+            String response = CameraControlChannel.getControl().jsonImageData.toString();
 
             showToast("method is GetRecogResult");
             serverIsBusy=false;
-            return newFixedLengthResponse(response);
+            return newFixedLengthResponse(Response.Status.OK,"application/json",response);
         }
-
 
         //================================================
         //===========   начать запись видео  =============
@@ -190,8 +193,12 @@ public class MyHTTPD extends RouterNanoHTTPD {
             mUiHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    CameraControlChannel.getControl().stream = new VideoStream(mContext,mActivity);
-                    CameraControlChannel.getControl().stream.startVideoRecord();
+                    try {
+                        CameraControlChannel.getControl().stream = new VideoStream(mContext,mActivity);
+                        CameraControlChannel.getControl().stream.startVideoRecord();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
             String response = "Start record";
@@ -244,8 +251,6 @@ public class MyHTTPD extends RouterNanoHTTPD {
         myThread.start();
     }
 
-
-
     public static class UserHandler extends GeneralHandler {
         @Override
         public String getText() {
@@ -261,5 +266,18 @@ public class MyHTTPD extends RouterNanoHTTPD {
         public Response.IStatus getStatus() {
             return Response.Status.OK;
         }
+    }
+
+    private JSONObject JSONBuilder(String ContainerNumber,String ISOcode, String Link)
+    {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("CaontainerNumber",ContainerNumber);
+            jsonObject.put("ISOcode",ISOcode);
+            jsonObject.put("Link",Link);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 }
