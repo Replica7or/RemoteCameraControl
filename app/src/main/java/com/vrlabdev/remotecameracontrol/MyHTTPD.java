@@ -2,6 +2,7 @@ package com.vrlabdev.remotecameracontrol;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Camera;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
@@ -125,58 +126,46 @@ public class MyHTTPD extends RouterNanoHTTPD {
             {
                 //ждем пока камера не вернет изображение
                 while (CameraControlChannel.getControl().isBusy) { }
-                CameraControlChannel.getControl().jsonImageData = JSONBuilder("Empty","Empty",randName);
+                try
+                {
+                    if(!CameraControlChannel.getControl().jsonImageData.has("Link"))
+                        CameraControlChannel.getControl().jsonImageData.put("Link",randName);
+                } catch (JSONException e) { e.printStackTrace(); }
+
                 return newFixedLengthResponse(Response.Status.OK, "application/json", CameraControlChannel.getControl().jsonImageData.toString());
             }
             else {
+                CameraControlChannel.getControl().isBusy=true;
                 if(uri.length()>16)
                     randName = uri.substring(16); //TODO: исправить
                 CameraControlChannel.getControl().filename = randName;
+
+                Thread myThread = new Thread(new Runnable() {
+                    @Override
+                    public void run()
+                    {
+                        mUiHandler.post(new Runnable() {
+                            @Override
+                            public void run()
+                            {
+                                //CameraControlChannel.getControl().stream = new VideoStream(mContext,mActivity);
+                                CameraControlChannel.getControl().stream.takePicture(true);
+                            }
+                        });
+                    }
+                });
+                myThread.start();
+                while(CameraControlChannel.getControl().isBusy){}
+                try { CameraControlChannel.getControl().jsonImageData.put("Link",randName); }
+                catch (JSONException e) { e.printStackTrace(); }
+
+                String response = CameraControlChannel.getControl().jsonImageData.toString();
+
+                showToast("method is GetRecogResult");
+                return newFixedLengthResponse(Response.Status.OK,"application/json",response);
             }
 
-            if(serverIsBusy) {
-                JSONObject jsonEmpty = new JSONObject();
-                try {
-                    jsonEmpty.put("ContainerNumber","Please wait");
-                    jsonEmpty.put("ISOcode","Camera is busy now");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                return newFixedLengthResponse(jsonEmpty.toString());
-            }
-            CameraControlChannel.getControl().isBusy=true;
 
-
-
-            Thread myThread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    mUiHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            //CameraControlChannel.getControl().stream = new VideoStream(mContext,mActivity);
-                            CameraControlChannel.getControl().stream.takePicture(true);
-                        }
-                    });
-                }
-            });
-            myThread.start();
-
-            while(CameraControlChannel.getControl().isBusy){}
-
-            //=========
-            try
-            {
-                CameraControlChannel.getControl().jsonImageData.put("Link",randName);
-            }
-            catch (JSONException e) { e.printStackTrace(); }
-            //=========
-
-            String response = CameraControlChannel.getControl().jsonImageData.toString();
-
-            showToast("method is GetRecogResult");
-            serverIsBusy=false;
-            return newFixedLengthResponse(Response.Status.OK,"application/json",response);
         }
 
         //================================================

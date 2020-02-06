@@ -297,16 +297,13 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                     byte[] bytes = new byte[buffer.capacity()];
                     buffer.get(bytes);
 
-                    try
-                    {
+                    try {
                         save(bytes,recognition);
                     }
-                    catch (IOException e)
-                    {
+                    catch (IOException e) {
                         e.printStackTrace();
                     }
-                    finally
-                    {
+                    finally {
                         image.close();
                     }
                 }
@@ -393,38 +390,48 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
 
             @Override
             public void recogOk(Map<String, String> map) {
-                    Collection<String> str = map.values();
-                    for (String col : str) {
-                        String result = getRez(col);
-                        Log.d("Result",result);
-                        //поделить результат распознавания наномер контейнера и исо-код
-                        String [] ResultArray = {"Empty","Empty"};
-                        if(result.contains(":")) {
-                            ResultArray = result.split(" : ");
-                        }
-                        JSONObject jsonObject = new JSONObject();
-                        try {
-                            jsonObject.put("ContainerNumber",ResultArray[0]);
-                            jsonObject.put("ISOcode",ResultArray[1]);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        CameraControlChannel.getControl().jsonImageData=jsonObject;
-
-                        CameraControlChannel.getControl().isBusy=false;
-                                File_Post filePost = new File_Post();
-                                filePost.TransieveFile(file);
-
-
+                Collection<String> str = map.values();
+                for (String col : str) {
+                    String result = getRez(col);
+                    Log.d("Result",result);
+                    //поделить результат распознавания наномер контейнера и исо-код
+                    String [] ResultArray = {"Empty","Empty"};
+                    if(result.contains(":")) {
+                        ResultArray = result.split(" : ");
                     }
+                    JSONObject jsonObject = new JSONObject();
+                    try {
+                        jsonObject.put("ContainerNumber",ResultArray[0]);
+                        jsonObject.put("ISOcode",ResultArray[1]);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    CameraControlChannel.getControl().jsonImageData=jsonObject;
+
+                    CameraControlChannel.getControl().isBusy=false;
+                    File_Post filePost = new File_Post();
+                    filePost.TransieveFile(file);
+                }
             }
 
             @Override
             public void recogError(BaseOcrException e) {
                 Log.e("ERROR", e.getMessage());
+
+                String [] ResultArray = {"Empty","Empty"};
+                JSONObject jsonObject = new JSONObject();
+                try {
+                    jsonObject.put("ContainerNumber",ResultArray[0]);
+                    jsonObject.put("ISOcode",ResultArray[1]);
+                } catch (JSONException except) {
+                    except.printStackTrace();
+                }
+                CameraControlChannel.getControl().jsonImageData=jsonObject;
+
+                CameraControlChannel.getControl().isBusy=false;
+
                 File_Post filePost = new File_Post();
                 filePost.TransieveFile(file);
-                CameraControlChannel.getControl().isBusy=false;
             }
 
             private String getRez(String col) {
