@@ -135,10 +135,10 @@ public class MyHTTPD extends RouterNanoHTTPD {
                 return newFixedLengthResponse(Response.Status.OK, "application/json", CameraControlChannel.getControl().jsonImageData.toString());
             }
             else {
-                CameraControlChannel.getControl().isBusy=true;
-                if(uri.length()>16)
-                    randName = uri.substring(16); //TODO: исправить
+                if(uri.length()>16) randName = uri.substring(16); //TODO: исправить
                 CameraControlChannel.getControl().filename = randName;
+
+                CameraControlChannel.getControl().isBusy=true;
 
                 Thread myThread = new Thread(new Runnable() {
                     @Override
@@ -164,8 +164,6 @@ public class MyHTTPD extends RouterNanoHTTPD {
                 showToast("method is GetRecogResult");
                 return newFixedLengthResponse(Response.Status.OK,"application/json",response);
             }
-
-
         }
 
         //================================================
@@ -261,7 +259,7 @@ public class MyHTTPD extends RouterNanoHTTPD {
     {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("CaontainerNumber",ContainerNumber);
+            jsonObject.put("ContainerNumber",ContainerNumber);
             jsonObject.put("ISOcode",ISOcode);
             jsonObject.put("Link",Link);
         } catch (JSONException e) {

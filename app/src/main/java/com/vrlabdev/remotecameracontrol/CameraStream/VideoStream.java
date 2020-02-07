@@ -95,7 +95,6 @@ public class VideoStream {
             assert mCameraManager != null;
             String [] CamerasList = mCameraManager.getCameraIdList();
 
-
             // создаем обработчик для камеры
             myCamera = new CameraService(mCameraManager, CamerasList[0]);
             StartCamera();
@@ -108,10 +107,9 @@ public class VideoStream {
 
     private void StartCamera() {
         if (myCamera != null) {
-            if (!myCamera.isOpen())
-            {
+
                 myCamera.openCamera();
-            }
+
         }
     }
 
@@ -170,6 +168,7 @@ public class VideoStream {
                 //
                 //раскомментировать это, если нужно постоянное изображение с камеры
                 //
+
                 startDrawing();
             }
 
@@ -183,7 +182,7 @@ public class VideoStream {
 
             @Override
             public void onError(CameraDevice camera, int error) {
-                Log.i(LOG_TAG, "error! camera id:" + camera.getId() + " error:" + error);
+                Log.e(LOG_TAG, "error! camera id:" + camera.getId() + " error:" + error);
             }
         };
 
@@ -191,7 +190,7 @@ public class VideoStream {
          *  простой вывод изображения с камеры. Preview
          */
         void startDrawing() {
-            setUpMediaCodec();
+            //setUpMediaCodec();
             SurfaceTexture surfacetexture = texture.getSurfaceTexture();
             surfacetexture.setDefaultBufferSize(320, 240);             //НАСТРОЙКА РАЗРЕШЕНИЯ КАМЕРЫ
             surface = new Surface(surfacetexture);
@@ -210,7 +209,7 @@ public class VideoStream {
                                     Thread.sleep(200);
                                     boolean BB=CameraControlChannel.getControl().isBusy;
                                     if(!BB)
-                                        mSession.setRepeatingRequest(mPreviewBuilder.build(), null, mBackgroundHandler);
+                                        mSession.setRepeatingRequest(mPreviewBuilder.build(), null, mBackgroundHandler);//TODO:
 
                                 } catch (InterruptedException | CameraAccessException e) {
                                     e.printStackTrace();
@@ -273,7 +272,7 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
             List<Surface> outputSurfaces = new ArrayList<>(2);
             outputSurfaces.add(reader.getSurface());
 
-            outputSurfaces.add(new Surface(texture.getSurfaceTexture()));
+            //outputSurfaces.add(new Surface(texture.getSurfaceTexture()));
 
             final CaptureRequest.Builder captureBuilder = cameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_STILL_CAPTURE);
 
@@ -292,7 +291,7 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
             ImageReader.OnImageAvailableListener readerListener = new ImageReader.OnImageAvailableListener() {
                 @Override
                 public void onImageAvailable(ImageReader imageReader) {
-                    Image image = reader.acquireLatestImage();
+                    Image image = reader.acquireNextImage();
                     ByteBuffer buffer = image.getPlanes()[0].getBuffer();
                     byte[] bytes = new byte[buffer.capacity()];
                     buffer.get(bytes);
@@ -316,11 +315,13 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                 public void onCaptureCompleted(@NotNull CameraCaptureSession session,@NotNull  CaptureRequest request,@NotNull  TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
                    // Toast.makeText(mContext.getApplicationContext(),"Saved",Toast.LENGTH_SHORT).show();
-                    try {
-                        mCameraManager.openCamera(mCameraID, mCameraCallback, mBackgroundHandler);
+                    /*try {
+                        //boolean BB=CameraControlChannel.getControl().isBusy;
+                        //if(!BB)
+                            mCameraManager.openCamera(mCameraID, mCameraCallback, mBackgroundHandler);
                     } catch (CameraAccessException e) {
                         e.printStackTrace();
-                    }
+                    }*/
                 }
             };
 
@@ -328,6 +329,7 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                 @Override
                 public void onConfigured(@NotNull CameraCaptureSession cameraCaptureSession) {
                     try {
+
                         cameraCaptureSession.capture(captureBuilder.build(),captureListener,mBackgroundHandler);
                     } catch (CameraAccessException e) {
                         e.printStackTrace();
@@ -360,12 +362,19 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                 e.printStackTrace();
             }
             if(!recognition)
-            {
+            {       // эта строка очень важна, она
+                try {
+                    mCameraManager.openCamera(mCameraID, mCameraCallback, mBackgroundHandler);
+                } catch (CameraAccessException e) {
+                    e.printStackTrace();
+                }
                 CameraControlChannel.getControl().isBusy=false;
                 File_Post filePost = new File_Post();
                 filePost.TransieveFile(file);
+
                 return;        //если просто сделать фото, то закончить функцию здесь. Если с распознавнаием, то выполнять дальше
             }
+
 
 
             final String [] massImages=new String[]{file.getAbsolutePath()};
@@ -408,7 +417,16 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                     }
                     CameraControlChannel.getControl().jsonImageData=jsonObject;
 
+//эта строка
+                    try {
+                        mCameraManager.openCamera(mCameraID, mCameraCallback, mBackgroundHandler);
+                    } catch (CameraAccessException e) {
+                        e.printStackTrace();
+                    }
+
                     CameraControlChannel.getControl().isBusy=false;
+
+                    //startDrawing();
                     File_Post filePost = new File_Post();
                     filePost.TransieveFile(file);
                 }
@@ -427,6 +445,12 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                     except.printStackTrace();
                 }
                 CameraControlChannel.getControl().jsonImageData=jsonObject;
+
+                try {
+                    mCameraManager.openCamera(mCameraID, mCameraCallback, mBackgroundHandler);
+                } catch (CameraAccessException ex) {
+                    ex.printStackTrace();
+                }
 
                 CameraControlChannel.getControl().isBusy=false;
 
@@ -534,7 +558,10 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
             }
 
             videoPath = null;
-            //startDrawing();
+            try { Thread.sleep(200); }
+            catch (InterruptedException e) { e.printStackTrace(); }
+
+            startDrawing();
         }
     }
 
@@ -644,7 +671,7 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
         mMediaRecorder.prepare();
     }
     private String getVideoFilePath(Context context) {
-        final File dir = context.getExternalFilesDir(null);
+        final File dir = Environment.getExternalStorageDirectory();//context.getExternalFilesDir(null);
         return (dir == null ? "" : (dir.getAbsolutePath() + "/")) + System.currentTimeMillis() + ".mp4";
     }
 

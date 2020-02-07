@@ -34,8 +34,8 @@ public class File_Post {
     {
         try
         {
-            m_Url = new URL("http://192.168.31.142:8080/SmartGlass/File");            //TODO: адрес для лабы
-            //m_Url = new URL("http://10.128.33.90:8080/SmartGlass/File");        //TODO: адрес для порта
+            //m_Url = new URL("http://192.168.31.142:8080/SmartGlass/File");            //TODO: адрес для лабы
+            m_Url = new URL(CameraControlChannel.getControl().fileUploadPath);        //TODO: адрес для порта
             final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
 
 

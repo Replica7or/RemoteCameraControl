@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">RemoteCameraControl</string>
+    <string name="VMTPip">10.128.33.90</string>
+    <string name="VRip">192.168.31.186</string>
+
+    <string name="VMTPfile">http://10.128.33.90:8080/SmartGlass/File</string>
+    <string name="VRLABfile">http://192.168.31.186:8080/SmartGlass/File</string>
 </resources>
