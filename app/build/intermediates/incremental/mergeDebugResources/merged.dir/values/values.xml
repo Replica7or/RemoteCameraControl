@@ -338,8 +338,8 @@
     <integer name="status_bar_notification_info_maxnum">999</integer>
     <string name="VMTPfile">http://10.128.33.90:8080/SmartGlass/File</string>
     <string name="VMTPip">10.128.33.90</string>
-    <string name="VRLABfile">http://192.168.31.186:8080/SmartGlass/File</string>
-    <string name="VRip">192.168.31.186</string>
+    <string name="VRLABfile">http://192.168.31.143:8080/SmartGlass/File</string>
+    <string name="VRip">192.168.31.143</string>
     <string name="abc_action_bar_home_description">Navigate home</string>
     <string name="abc_action_bar_up_description">Navigate up</string>
     <string name="abc_action_menu_overflow_description">More options</string>

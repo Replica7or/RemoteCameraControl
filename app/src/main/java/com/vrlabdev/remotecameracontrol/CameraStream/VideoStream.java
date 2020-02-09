@@ -78,7 +78,7 @@ public class VideoStream {
     private TextureView texture;
     private CameraDevice cameraDevice;
 
-    private boolean isRecordingVideo=false;
+    public boolean isRecordingVideo=false;
 
 
     public VideoStream(Context context,Activity activity) {
@@ -256,6 +256,11 @@ public class VideoStream {
                 return;
             }
 
+            if(CameraControlChannel.getControl().isRecordingVideo)
+            {
+               return;
+            }
+
             int width = 4608;
             int height = 3456;
             /*CameraManager manager = (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
@@ -382,15 +387,15 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
             MainInteractorImpl mainInteractor = new MainInteractorImpl(mActivity);
             Log.d("FILE_FILE", file.getAbsolutePath()+"   "+file.length());
 
-            //File downloadDirectory = new File("/sdcard/Android/data/com.vrlabdev.remotecameracontrol/files/Download/");
-            //downloadDirectory.mkdir();
-
             //mainInteractor.importServerKey("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCTO3et7a3NlDcPPbtJSBxI9MH6Dk6PE6zptZwp+6L3ijh7PxR0uyNaSSWnmQmzYxZNsGyBlGs+dQhlc4HFUjCaOVBaSDNaFaqXdfEm2TluLg5IhjxZLSbhYvLcgh4WEBernnWhjrRSXzV3AWRfiGBQqFleV09Xrp+vuQxn3BhoawIDAQAB");
             //String licenseString = mainInteractor.generateLicenseRequest("b083c358-a424-4833-bfdc-3acf0c2db056", "052a13d0-9048-4f41-8c63-4a8130ee5b3c");
-            // writeToFile(new File("/sdcard/licenseRequest"),licenseString);
+            //writeToFile(new File("/sdcard/licenseRequest"),licenseString);
+
+            //File downloadDirectory = new File("/sdcard/Android/data/com.vrlabdev.remotecameracontrol/files/Download/");
+            //downloadDirectory.mkdir();
             //Log.d("TWERQ",licenseString);
 
-            mainInteractor.importLicense("863f8b0c4824a9d8903d0f71b92959e1b55cef8d926b6ca4463b8be1f9a363b1352f94cfbf9b1a9505887c277a78c24e4a6a52e1301c8405624c8629871a2ee474015451500f8f22d9880c2dd304de447712360d97207bdd7392f3e63f843df48fa76b25e2e6acd982c2fbf5f99ddc7d16d83ed395d61415bc7652b910f027e844dff7f42a6c925a06094ec1cda85fb24360160fa3bb4dd444708a269d26e7737891c28eb96f6003a891eeeeac83bf767c8ae22efcd6224a823f2ea6b61862a38d4d996ed9424dcd5e52d818d2eaa0a6ac86435175c9b82d5d58579ccfa41412f768577eae23b58d64aad8898f52cc229683b05a05a0fb2df169a4fff978e99f707f56d155e52d75e3d72926939218ca07aa0f6bc15c98be9e83c91cc3d86fd0d29c984af6c1bbbe59e692746c339e636ac177d09e02bd2ff8536a3b84327ff46694a3653dd6c83263195fc6640cbf86d58a5b090060c98d7c255a4fb92c4f6274ca889241c44ad2b70d5b11b7bab12c5d175cf85e1671cf2ec77f4fcbfc07cb");
+            mainInteractor.importLicense("1eaf6eeaf501bf39eaca55e4100484a340273101c3bdc963bc0cd815af03605169c04bb4bad7b6548a2fb127288e08366efec9052554ebfaff3f3edfcb4487545e6389081f89034fc1c5617d1fcb89775852e90917e576d9fef97a33e3b02602b775ed844fdbd73109118838cf3637b79fd396b113c6d6d3cad70d610b81a2fe3914edb16256fa4fe15dbbb8b41eb6c959ebe896eb3c1cb0fa4426ec7b8ea59353b325926d0e2bd531197bae573da13de6d1a4a1cd0472db2e860aedc3da2b1361a1cbb2d85d753c38324b468cc967cf06883ccd4921dbf4201c87271cf3b8defee5354d6950ffa3fb5da392e7bdb19d0996cf29ca3b4507cfa144c1bedff68f6722f73d3ce00c2f635120db95f12b3904a7a34818c49fbefdcd893b0452a2df833296e90638db054cb6dc88b101c8bc86ed3e61e40cf698d9e50022dccdf14bb6f1fa6e1b8658a2185a359153c218e0b8b8e5aa95977defd98dd9fb1348ef3839bc69cace8d0134c07c00bd0bffb341ad7163e51cbe8bdccbf5d441cf8205a0");
             mainInteractor.doRecognize("b083c358-a424-4833-bfdc-3acf0c2db056", "052a13d0-9048-4f41-8c63-4a8130ee5b3c", massImages, openOpen);
         }
 
@@ -488,80 +493,88 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
             {
                 return;
             }
-            try
+            if(!CameraControlChannel.getControl().isRecordingVideo & !CameraControlChannel.getControl().isBusy)
             {
-                setUpMediaRecorder();
-                SurfaceTexture mTexture = texture.getSurfaceTexture();
+                try
+                {
+                    setUpMediaRecorder();
+                    SurfaceTexture mTexture = texture.getSurfaceTexture();
 
-                mTexture.setDefaultBufferSize(720, 480);
+                    mTexture.setDefaultBufferSize(720, 480);
 
-                mPreviewBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_RECORD);
-                List<Surface> surfaces = new ArrayList<>();
+                    mPreviewBuilder = mCameraDevice.createCaptureRequest(CameraDevice.TEMPLATE_RECORD);
+                    List<Surface> surfaces = new ArrayList<>();
 
-                // Set up Surface for the camera preview
-                Surface previewSurface = new Surface(mTexture);
-                surfaces.add(previewSurface);
-                mPreviewBuilder.addTarget(previewSurface);
+                    // Set up Surface for the camera preview
+                    Surface previewSurface = new Surface(mTexture);
+                    surfaces.add(previewSurface);
+                    mPreviewBuilder.addTarget(previewSurface);
 
-                // Set up Surface for the MediaRecorder
-                Surface recorderSurface = mMediaRecorder.getSurface();
-                surfaces.add(recorderSurface);
-                mPreviewBuilder.addTarget(recorderSurface);
+                    // Set up Surface for the MediaRecorder
+                    Surface recorderSurface = mMediaRecorder.getSurface();
+                    surfaces.add(recorderSurface);
+                    mPreviewBuilder.addTarget(recorderSurface);
 
-                // Start a capture session
-                // Once the session starts, we can update the UI and start recording
-                mCameraDevice.createCaptureSession(surfaces, new CameraCaptureSession.StateCallback() {
+                    // Start a capture session
+                    // Once the session starts, we can update the UI and start recording
+                    mCameraDevice.createCaptureSession(surfaces, new CameraCaptureSession.StateCallback() {
 
-                    @Override
-                    public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
-                        mSession = cameraCaptureSession;
-                        try {
-                            mSession.setRepeatingRequest(mPreviewBuilder.build(), null, mBackgroundHandler);
-                        } catch (CameraAccessException e) {
-                            e.printStackTrace();
+                        @Override
+                        public void onConfigured(@NonNull CameraCaptureSession cameraCaptureSession) {
+                            mSession = cameraCaptureSession;
+                            try {
+                                if(!CameraControlChannel.getControl().isBusy)
+                                    mSession.setRepeatingRequest(mPreviewBuilder.build(), null, mBackgroundHandler);
+                            } catch (CameraAccessException e) {
+                                e.printStackTrace();
+                            }
+                            CameraControlChannel.getControl().isRecordingVideo=true;
+                            mMediaRecorder.start();
                         }
-                        isRecordingVideo=true;
-
-                        mMediaRecorder.start();
-                    }
 
 
-                    @Override
-                    public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession) {
-
-                        if (null != mContext) {
-                            Toast.makeText(mContext, "Failed", Toast.LENGTH_SHORT).show();
+                        @Override
+                        public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession) {
+                            if (null != mContext) {
+                                Toast.makeText(mContext, "Не удалось начать запись", Toast.LENGTH_SHORT).show();
+                                CameraControlChannel.getControl().isRecordingVideo=false;
+                            }
                         }
-                    }
-                }, mBackgroundHandler);
-
-        }
-            catch (CameraAccessException e)
-            {
-                e.printStackTrace();
+                    }, mBackgroundHandler);
+                }
+                catch (CameraAccessException e)
+                {
+                    e.printStackTrace();
+                }
             }
+
+
         }
 
 
 
         private void stopRecordingVideo() {
-            isRecordingVideo=false;
+            if(CameraControlChannel.getControl().isRecordingVideo) {
 
-            // Stop recording
-            mMediaRecorder.stop();
-            mMediaRecorder.reset();
+                // Stop recording
+                mMediaRecorder.stop();
+                mMediaRecorder.reset();
 
-            if (null != mContext) {
-                Toast.makeText(mContext, "Video saved: " + videoPath,
-                        Toast.LENGTH_SHORT).show();
-                Log.d("VIDEO    TAG     ", "Video saved: " + videoPath);
+                if (null != mContext) {
+                    Toast.makeText(mContext, "Video saved: " + videoPath, Toast.LENGTH_SHORT).show();Log.d("VIDEO", "Video saved: " + videoPath);
+                }
+
+                videoPath = null;
+
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                startDrawing();
+                CameraControlChannel.getControl().isRecordingVideo = false;
             }
-
-            videoPath = null;
-            try { Thread.sleep(200); }
-            catch (InterruptedException e) { e.printStackTrace(); }
-
-            startDrawing();
         }
     }
 

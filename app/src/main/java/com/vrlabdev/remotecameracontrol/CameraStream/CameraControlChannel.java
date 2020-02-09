@@ -9,6 +9,7 @@ public class CameraControlChannel {
 
     public VideoStream stream;
     public boolean isBusy = false;
+    public boolean isRecordingVideo = false;
 
     public JSONObject jsonImageData = null;
 

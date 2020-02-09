@@ -76,6 +76,14 @@ public class MyHTTPD extends RouterNanoHTTPD {
         if (uri.contains("/TakePhoto")) {
             String randName = System.currentTimeMillis() / 1000 + ".jpg";
 
+            boolean Q = CameraControlChannel.getControl().isRecordingVideo;
+
+            if(Q)
+            {
+                showToast("method is GetRecogResult");
+                return newFixedLengthResponse(Response.Status.CONFLICT,"application/json","отключите запись видео");
+            }
+
             //если камера занята
             if(CameraControlChannel.getControl().isBusy)
             {
@@ -112,7 +120,6 @@ public class MyHTTPD extends RouterNanoHTTPD {
                 showToast("method is TakePhoto");
                 return newFixedLengthResponse(Response.Status.OK, "application/json", CameraControlChannel.getControl().jsonImageData.toString());
             }
-
         }
 
 
@@ -121,6 +128,12 @@ public class MyHTTPD extends RouterNanoHTTPD {
         if(uri.contains("/GetRecogResult"))
         {
             String randName = System.currentTimeMillis() / 1000 + ".jpg";
+
+            if(CameraControlChannel.getControl().isRecordingVideo)
+            {
+                showToast("method is GetRecogResult");
+                return newFixedLengthResponse(Response.Status.CONFLICT,"application/json","отключите запись видео");
+            }
 
             if(CameraControlChannel.getControl().isBusy)
             {
