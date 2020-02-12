@@ -1,10 +1,14 @@
 package com.vrlabdev.remotecameracontrol;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.SurfaceTexture;
 import android.net.Uri;
 import android.os.Build;
@@ -50,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private Handler mUiHandler = new Handler();
     private Handler mBackgroundHandler;
 
+    private boolean QQQ=true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -63,8 +69,15 @@ public class MainActivity extends AppCompatActivity {
 
         serverip=this.getResources().getString(R.string.VMTPip);       //TODO: для работы в порту
 
-        int i=10;
-        i=15;
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED
+        || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+        || ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            // разрешение не предоставлен
+            Intent permissions  =new Intent(this, permissions.class);
+            startActivity(permissions);
+            finish();
+        }
+
         selector.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -81,32 +94,11 @@ public class MainActivity extends AppCompatActivity {
                     editText.setVisibility(View.INVISIBLE);
                     editText.setText(R.string.VMTPip);
                     CameraControlChannel.getControl().fileUploadPath= MainActivity.this.getResources().getString(R.string.VMTPfile);
-
                 }
             }
         });
-        Thread myThread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                mUiHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        MyHTTPD myHTTPD;
-                        try {
-                            myHTTPD = new MyHTTPD();
-                            myHTTPD.setmContext(getApplicationContext());
-                            myHTTPD.setmActivity(MainActivity.this);
 
-                            myHTTPD.start();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-        }
-        );
-        myThread.start();
+        StartHTTTPserver();
         startIpSender();
 
         /**
@@ -142,8 +134,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-            }
+            public void onSurfaceTextureUpdated(SurfaceTexture surface) { }
         };
         textureView.setSurfaceTextureListener(surfaceTextureListener);
 
@@ -164,7 +155,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.length()>6)
-                    //if(String.valueOf(s).split(".").length==4)
                     {
                         String IPADDRESS_PATTERN = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
                                                     +"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
@@ -178,11 +168,38 @@ public class MainActivity extends AppCompatActivity {
                             serverip = s.toString();
                             startIpSender();
                         }
-
                     }
             }
         });
     }
+
+
+    void StartHTTTPserver()
+    {
+        Thread myThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mUiHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        MyHTTPD myHTTPD;
+                        try {
+                            myHTTPD = new MyHTTPD();
+                            myHTTPD.setmContext(getApplicationContext());
+                            myHTTPD.setmActivity(MainActivity.this);
+
+                            myHTTPD.start();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+        }
+        );
+        myThread.start();
+    }
+
 
     /**
      * Показать тост с текстом посередине экрана
@@ -211,7 +228,6 @@ public class MainActivity extends AppCompatActivity {
     private void stopBackgroundThread() throws InterruptedException
     {
         mBackgroundThread.quitSafely();
-
         mBackgroundThread.join();
         mBackgroundThread = null;
         mBackgroundHandler = null;
@@ -221,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
     {
         install_apk(new File("/sdcard/app-debug.apk"));
     }
+
     void install_apk(File file) {
         try {
             if (file.exists()) {
@@ -246,8 +263,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     Uri getFileUri(Context context, File file) {
-        return FileProvider.getUriForFile(MainActivity.this,
-                context.getApplicationContext().getPackageName() + ".provider"
-                , file);
+        return FileProvider.getUriForFile(MainActivity.this, context.getApplicationContext().getPackageName() + ".provider", file);
     }
 }
