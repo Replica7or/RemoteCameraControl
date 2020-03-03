@@ -58,45 +58,44 @@
 30-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:21:9-54
 31        android:supportsRtl="true"
 31-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:22:9-35
-32        android:testOnly="true"
-33        android:theme="@style/AppTheme"
-33-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:23:9-40
-34        android:usesCleartextTraffic="true" >
-34-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:24:9-44
-35        <activity android:name="com.vrlabdev.remotecameracontrol.permissions" />
-35-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:25:9-58
-35-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:25:19-46
-36        <activity android:name="com.vrlabdev.remotecameracontrol.MainActivity" >
-36-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:26:9-32:20
-36-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:26:19-47
-37            <intent-filter>
-37-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:27:13-31:29
-38                <action android:name="android.intent.action.MAIN" />
-38-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:28:17-69
-38-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:28:25-66
-39
-40                <category android:name="android.intent.category.LAUNCHER" />
-40-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:30:17-77
-40-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:30:27-74
-41            </intent-filter>
-42        </activity>
-43
-44        <provider
-45            android:name="androidx.core.content.FileProvider"
-45-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:35:13-62
-46            android:authorities="net.majorkernelpanic.remotecameracontrol.provider"
-46-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:36:13-60
-47            android:exported="false"
-47-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:37:13-37
-48            android:grantUriPermissions="true" >
-48-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:38:13-47
-49            <meta-data
-49-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:39:13-41:58
-50                android:name="android.support.FILE_PROVIDER_PATHS"
-50-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:40:17-67
-51                android:resource="@xml/provider_paths" />
-51-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:41:17-55
-52        </provider>
-53    </application>
-54
-55</manifest>
+32        android:theme="@style/AppTheme"
+32-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:23:9-40
+33        android:usesCleartextTraffic="true" >
+33-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:24:9-44
+34        <activity android:name="com.vrlabdev.remotecameracontrol.permissions" />
+34-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:25:9-58
+34-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:25:19-46
+35        <activity android:name="com.vrlabdev.remotecameracontrol.MainActivity" >
+35-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:26:9-32:20
+35-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:26:19-47
+36            <intent-filter>
+36-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:27:13-31:29
+37                <action android:name="android.intent.action.MAIN" />
+37-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:28:17-69
+37-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:28:25-66
+38
+39                <category android:name="android.intent.category.LAUNCHER" />
+39-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:30:17-77
+39-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:30:27-74
+40            </intent-filter>
+41        </activity>
+42
+43        <provider
+44            android:name="androidx.core.content.FileProvider"
+44-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:35:13-62
+45            android:authorities="net.majorkernelpanic.remotecameracontrol.provider"
+45-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:36:13-60
+46            android:exported="false"
+46-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:37:13-37
+47            android:grantUriPermissions="true" >
+47-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:38:13-47
+48            <meta-data
+48-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:39:13-41:58
+49                android:name="android.support.FILE_PROVIDER_PATHS"
+49-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:40:17-67
+50                android:resource="@xml/provider_paths" />
+50-->C:\Users\i\Desktop\repo\RemoteCameraControl\app\src\main\AndroidManifest.xml:41:17-55
+51        </provider>
+52    </application>
+53
+54</manifest>

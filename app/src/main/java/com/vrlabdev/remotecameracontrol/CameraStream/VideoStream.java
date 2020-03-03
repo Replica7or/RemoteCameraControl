@@ -58,7 +58,6 @@ public class VideoStream {
     private static final String LOG_TAG = "myLogs";
 
 
-
     private HandlerThread mBackgroundThread;
     private Handler mBackgroundHandler = null;
 
@@ -395,6 +394,9 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
             //downloadDirectory.mkdir();
             //Log.d("TWERQ",licenseString);
 
+
+            Log.d("logtrace BEFORE RECOGNITION","we are there");
+
             mainInteractor.importLicense("1eaf6eeaf501bf39eaca55e4100484a340273101c3bdc963bc0cd815af03605169c04bb4bad7b6548a2fb127288e08366efec9052554ebfaff3f3edfcb4487545e6389081f89034fc1c5617d1fcb89775852e90917e576d9fef97a33e3b02602b775ed844fdbd73109118838cf3637b79fd396b113c6d6d3cad70d610b81a2fe3914edb16256fa4fe15dbbb8b41eb6c959ebe896eb3c1cb0fa4426ec7b8ea59353b325926d0e2bd531197bae573da13de6d1a4a1cd0472db2e860aedc3da2b1361a1cbb2d85d753c38324b468cc967cf06883ccd4921dbf4201c87271cf3b8defee5354d6950ffa3fb5da392e7bdb19d0996cf29ca3b4507cfa144c1bedff68f6722f73d3ce00c2f635120db95f12b3904a7a34818c49fbefdcd893b0452a2df833296e90638db054cb6dc88b101c8bc86ed3e61e40cf698d9e50022dccdf14bb6f1fa6e1b8658a2185a359153c218e0b8b8e5aa95977defd98dd9fb1348ef3839bc69cace8d0134c07c00bd0bffb341ad7163e51cbe8bdccbf5d441cf8205a0");
             mainInteractor.doRecognize("b083c358-a424-4833-bfdc-3acf0c2db056", "052a13d0-9048-4f41-8c63-4a8130ee5b3c", massImages, openOpen);
         }
@@ -422,13 +424,13 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                     }
                     CameraControlChannel.getControl().jsonImageData=jsonObject;
 
-//эта строка
                     try {
                         mCameraManager.openCamera(mCameraID, mCameraCallback, mBackgroundHandler);
                     } catch (CameraAccessException e) {
                         e.printStackTrace();
                     }
 
+                    Log.d("logtrace OKresult","we are there");
                     CameraControlChannel.getControl().isBusy=false;
 
                     //startDrawing();
@@ -457,6 +459,7 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                     ex.printStackTrace();
                 }
 
+                Log.d("logtrace ERRORresult","we are there");
                 CameraControlChannel.getControl().isBusy=false;
 
                 File_Post filePost = new File_Post();
@@ -509,6 +512,7 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                     Surface previewSurface = new Surface(mTexture);
                     surfaces.add(previewSurface);
                     mPreviewBuilder.addTarget(previewSurface);
+                    mPreviewBuilder.addTarget(previewSurface);
 
                     // Set up Surface for the MediaRecorder
                     Surface recorderSurface = mMediaRecorder.getSurface();
@@ -532,7 +536,6 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                             mMediaRecorder.start();
                         }
 
-
                         @Override
                         public void onConfigureFailed(@NonNull CameraCaptureSession cameraCaptureSession) {
                             if (null != mContext) {
@@ -547,8 +550,6 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                     e.printStackTrace();
                 }
             }
-
-
         }
 
 
@@ -561,10 +562,10 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                 mMediaRecorder.reset();
 
                 if (null != mContext) {
-                    Toast.makeText(mContext, "Video saved: " + videoPath, Toast.LENGTH_SHORT).show();Log.d("VIDEO", "Video saved: " + videoPath);
+                    Toast.makeText(mContext, "Video saved: " + videoPath, Toast.LENGTH_SHORT).show();
+                    Log.d("VIDEO", "Video saved: " + videoPath);
                 }
 
-                videoPath = null;
 
                 try {
                     Thread.sleep(200);
@@ -573,6 +574,20 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
                 }
 
                 startDrawing();
+                final File videoFile = new File(videoPath);
+
+                Thread uploadVideo = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        File_Post FP=new File_Post();
+                        FP.UploadVideo(videoFile);
+                        //videoPath = null;
+                    }
+                }
+                );
+                uploadVideo.start();
+
+                videoPath=null;
                 CameraControlChannel.getControl().isRecordingVideo = false;
             }
         }
@@ -667,10 +682,10 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
         }
         mMediaRecorder.setOutputFile(videoPath);
 
-        CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_720P);
-        mMediaRecorder.setVideoFrameRate(profile.videoFrameRate);
+        CamcorderProfile profile = CamcorderProfile.get(CamcorderProfile.QUALITY_480P);
+        mMediaRecorder.setVideoFrameRate(15);
         mMediaRecorder.setVideoSize(profile.videoFrameWidth, profile.videoFrameHeight);
-        mMediaRecorder.setVideoEncodingBitRate(profile.videoBitRate);
+        mMediaRecorder.setVideoEncodingBitRate(10000000);
         mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
         mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
         mMediaRecorder.setAudioEncodingBitRate(profile.audioBitRate);
@@ -684,10 +699,10 @@ Log.d("QQQ",String.valueOf(jpegSizes.length));*/
         mMediaRecorder.prepare();
     }
     private String getVideoFilePath(Context context) {
-        final File dir = Environment.getExternalStorageDirectory();//context.getExternalFilesDir(null);
+        final File dir = new File("/storage/self/primary/Movies");//context.getExternalFilesDir(null);//Environment.getExternalStorageDirectory();
         return (dir == null ? "" : (dir.getAbsolutePath() + "/")) + System.currentTimeMillis() + ".mp4";
     }
-
+///sdcard/1581562055058.mp4
 
 
 

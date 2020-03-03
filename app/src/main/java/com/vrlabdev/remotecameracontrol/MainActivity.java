@@ -6,9 +6,13 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import android.Manifest;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.PixelFormat;
 import android.graphics.SurfaceTexture;
 import android.net.Uri;
 import android.os.Build;
@@ -21,10 +25,13 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.TextureView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -54,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
     private Handler mUiHandler = new Handler();
     private Handler mBackgroundHandler;
 
-    private boolean QQQ=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -172,6 +178,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 
     void StartHTTTPserver()

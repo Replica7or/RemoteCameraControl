@@ -14,6 +14,7 @@ public class CameraControlChannel {
     public JSONObject jsonImageData = null;
 
     public String filename=null;
+    public String videoName = null;
 
     public String fileUploadPath ="http://10.128.33.90:8080/SmartGlass/File";
 

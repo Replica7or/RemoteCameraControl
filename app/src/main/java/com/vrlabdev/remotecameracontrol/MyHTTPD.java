@@ -19,8 +19,6 @@ import java.util.Map;
 
 import fi.iki.elonen.NanoHTTPD;
 import  fi.iki.elonen.router.RouterNanoHTTPD;
-import okhttp3.MediaType;
-import okhttp3.Response;
 
 
 public class MyHTTPD extends RouterNanoHTTPD {
@@ -36,6 +34,8 @@ public class MyHTTPD extends RouterNanoHTTPD {
     private StoreHandler storeHandler;
 
     private SessionStack sessionStack;
+
+    private String videoName=null;
 
     // ТЕСТОВАЯ ПОЕБЕНЬ \\
     public static class StoreHandler extends GeneralHandler {
@@ -135,9 +135,8 @@ public class MyHTTPD extends RouterNanoHTTPD {
                 return newFixedLengthResponse(Response.Status.CONFLICT,"application/json","отключите запись видео");
             }
 
-            if(CameraControlChannel.getControl().isBusy)
+            if(CameraControlChannel.getControl().isBusy)    //если камера занята
             {
-                //ждем пока камера не вернет изображение
                 while (CameraControlChannel.getControl().isBusy) { }
                 try
                 {
@@ -145,8 +144,11 @@ public class MyHTTPD extends RouterNanoHTTPD {
                         CameraControlChannel.getControl().jsonImageData.put("Link",randName);
                 } catch (JSONException e) { e.printStackTrace(); }
 
+
+                Log.d("logtrace RETURN result","Возвращаем результат из первого запроса");
                 return newFixedLengthResponse(Response.Status.OK, "application/json", CameraControlChannel.getControl().jsonImageData.toString());
             }
+            //если камера свободна
             else {
                 if(uri.length()>16) randName = uri.substring(16); //TODO: исправить
                 CameraControlChannel.getControl().filename = randName;
@@ -168,12 +170,14 @@ public class MyHTTPD extends RouterNanoHTTPD {
                     }
                 });
                 myThread.start();
-                while(CameraControlChannel.getControl().isBusy){}
+
+                while(CameraControlChannel.getControl().isBusy){} //ждем пока камера не вернет изображение
                 try { CameraControlChannel.getControl().jsonImageData.put("Link",randName); }
                 catch (JSONException e) { e.printStackTrace(); }
 
                 String response = CameraControlChannel.getControl().jsonImageData.toString();
 
+                Log.d("logtrace RETURN result","Возвращаем результат из стека запросов");
                 showToast("method is GetRecogResult");
                 return newFixedLengthResponse(Response.Status.OK,"application/json",response);
             }
@@ -183,12 +187,17 @@ public class MyHTTPD extends RouterNanoHTTPD {
         //===========   начать запись видео  =============
         //================================================
 
-        if (uri.equals("/StartVideo")) {
+        if (uri.contains("/StartVideo")) {
             if(serverIsBusy)
             {
                 return newFixedLengthResponse("Please wait. Camera is busy now");
             }
             serverIsBusy=true;
+
+            //задать имя файла
+            CameraControlChannel.getControl().videoName = String.valueOf(System.currentTimeMillis() / 1000);
+            if(uri.length()>"/StartVideo".length())
+                CameraControlChannel.getControl().videoName = uri.substring(12);
 
             mUiHandler.post(new Runnable() {
                 @Override
@@ -219,7 +228,10 @@ public class MyHTTPD extends RouterNanoHTTPD {
                     CameraControlChannel.getControl().stream.stopVideoRecord();
                 }
             });
-            String response = "stop record";
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject = JSONBuilder("Empty","Empty",CameraControlChannel.getControl().videoName);
+            String response = jsonObject.toString();
             showToast("method is StopVideo");
 
             serverIsBusy=false;
